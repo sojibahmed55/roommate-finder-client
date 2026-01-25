@@ -2,6 +2,9 @@ import React, { Suspense } from 'react';
 import Roommate from './Roommate';
 import Spinner from '../../Components/Spinner/Spinner';
 import RoommateSection from '../Shared/RoommateSection';
+import HowRoommateWorks from '../Shared/HowRoommateWorks';
+import LifestyleMatch from '../Shared/LifestyleMatch';
+import Slider from '../Shared/Slider';
 // import { useLoaderData } from 'react-router';
 // import RommateCard from '../../Components/RoommateCard/RommateCard';
 
@@ -13,6 +16,7 @@ const Home = () => {
 
     return (
         <div>
+            <Slider></Slider>
 
             {/* <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
                 {
@@ -25,6 +29,8 @@ const Home = () => {
 
             <div>
                 <RoommateSection></RoommateSection>
+                <HowRoommateWorks></HowRoommateWorks>
+                <LifestyleMatch></LifestyleMatch>
             </div>
         </div>
     );

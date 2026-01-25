@@ -390,7 +390,7 @@ const Navbar = () => {
                   className="
                     px-6 py-2.5 rounded-sm
                     text-sm
-                    border border-[#8f7848]
+                    border border-[#c9b27c]
                     text-black
                     hover:bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c]
                     
