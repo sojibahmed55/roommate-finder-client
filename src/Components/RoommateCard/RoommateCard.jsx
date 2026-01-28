@@ -93,7 +93,7 @@ const RoommateCard = ({ roommate }) => {
       : availability === 'Available';
 
   return (
-    <div className="w-full max-w-[570px] bg-[#fdfbf7] rounded-[28px] shadow-[0_28px_80px_rgba(143,120,72,0.25)] border border-[#e2d6bf] p-8">
+    <div className="w-full mx-auto max-w-[570px] bg-[#fdfbf7] rounded-[28px] shadow-[0_28px_80px_rgba(143,120,72,0.25)] border border-[#e2d6bf] p-8">
 
       {/* Image */}
       <img
