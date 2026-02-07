@@ -797,13 +797,13 @@ const Slider = () => {
                         cursor-pointer
                         px-8 py-3
                         sm:px-10 sm:py-4
-                        rounded-full
+                        rounded-sm
                         border border-[#e3d8c2]
                         text-[#e3d8c2]
                         text-sm sm:text-base
                         hover:bg-[#e3d8c2]
                         hover:text-black
-                        transition-all duration-300
+                        
                       "
                     >
                       {slide.btn}

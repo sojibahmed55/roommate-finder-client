@@ -255,170 +255,362 @@
 // export default Navbar;
 
 
-import React, { useContext } from "react";
-import { NavLink } from "react-router";
+// import React, { useContext } from "react";
+// import { NavLink } from "react-router";
+// import { AuthContext } from "../../contexts/AuthContext/AuthContext";
+// import { FaHome } from "react-icons/fa";
+
+// const Navbar = () => {
+//   const { user, signOutUser } = useContext(AuthContext);
+
+//   const handleSignOut = () => {
+//     signOutUser().catch(console.log);
+//   };
+
+//   const linkClass = ({ isActive }) =>
+//     `
+//     relative px-5 py-2 rounded-sm text-sm tracking-wide transition-all duration-300
+//     ${isActive
+//       ? "text-[#0b0b0b] bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c] shadow-[0_8px_30px_rgba(143,120,72,0.45)]"
+//       : "text-[#1a1a1a] hover:text-[#8f7848] hover:bg-[#f3eddf]"}
+//   `;
+
+//   return (
+//     <header className="
+//       sticky top-0 z-[999]
+//       backdrop-blur-2xl
+//       bg-white/80
+//       border-b border-[#e6dbc3]
+//       shadow-[0_12px_60px_rgba(143,120,72,0.25)]
+//     ">
+//       <div className="max-w-7xl mx-auto px-4">
+//         <div className="flex items-center justify-between h-16">
+
+//           {/* LEFT */}
+//           <div className="flex items-center gap-3">
+//             {/* Mobile */}
+//             <div className="dropdown lg:hidden">
+//               <label tabIndex={0} className="
+//                 btn btn-ghost rounded-full
+//                 hover:bg-[#f3eddf]
+//               ">
+//                 <svg className="w-6 h-6 text-[#8f7848]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+//                     d="M4 6h16M4 12h10M4 18h16" />
+//                 </svg>
+//               </label>
+
+//               <ul tabIndex={0} className="
+//                 menu dropdown-content mt-3 w-56
+//                 rounded-3xl
+//                 bg-[#fdfbf7]
+//                 border border-[#e2d6bf]
+//                 shadow-[0_30px_90px_rgba(143,120,72,0.35)]
+//                 p-3
+//               ">
+              //   <li><NavLink to="/" className={linkClass}>Home</NavLink></li>
+              //   <li><NavLink to="/add-listing" className={linkClass}>Add Listing</NavLink></li>
+              //   <li><NavLink to="/browse-listing" className={linkClass}>Browse</NavLink></li>
+              //   <li><NavLink to="/my-listing" className={linkClass}>My Listing</NavLink></li>
+              // </ul>
+//             </div>
+
+//             {/* LOGO */}
+//             <div className="flex items-center gap-2 cursor-pointer">
+//               <div className="
+//                 w-10 h-10 rounded-2xl
+//                 bg-gradient-to-br from-[#c9b27c] to-[#8f7848]
+//                 grid place-items-center
+//                 shadow-[0_10px_40px_rgba(143,120,72,0.6)]
+//               ">
+//                 <span className="text-black font-bold text-lg"><FaHome></FaHome></span>
+//               </div>
+
+//               <span className="text-xl md:text-2xl font-semibold tracking-wide text-[#0b0b0b]">
+//                 Find
+//                 <span className="text-[#8f7848]">Roomy</span>
+//               </span>
+//             </div>
+//           </div>
+
+//           {/* CENTER */}
+//           <nav className="hidden lg:flex gap-2">
+//             <NavLink to="/" className={linkClass}>Home</NavLink>
+//             <NavLink to="/add-listing" className={linkClass}>Add Listing</NavLink>
+//             <NavLink to="/browse-listing" className={linkClass}>Browse</NavLink>
+//             <NavLink to="/my-listing" className={linkClass}>My Listing</NavLink>
+//           </nav>
+
+//           {/* RIGHT */}
+//           <div className="flex items-center gap-4">
+//             {user ? (
+//               <>
+//                 {/* USER */}
+//                 <div className="relative group">
+//                   <img
+//                     src={user.photoURL}
+//                     alt="user"
+//                     className="
+//                       w-11 h-11 rounded-full
+//                       ring-2 ring-[#e2d6bf]
+//                       group-hover:ring-[#8f7848]
+//                       transition
+//                     "
+//                   />
+//                   <div className="
+//                     absolute -bottom-14 left-1/2 -translate-x-1/2
+//                     opacity-0 group-hover:opacity-100
+//                     bg-[#0b0b0b] text-white
+//                     text-xs px-4 py-2 rounded-full
+//                     shadow-lg transition
+//                   ">
+//                     {user.displayName || "User"}
+//                   </div>
+//                 </div>
+
+//                 {/* LOGOUT */}
+//                 <button
+//                   onClick={handleSignOut}
+//                   className="
+//                     px-6 py-2.5 rounded-full
+//                     text-sm font-medium tracking-wide
+//                     bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c]
+//                     text-[#0b0b0b]
+//                     shadow-[0_12px_40px_rgba(143,120,72,0.55)]
+//                     hover:scale-105 transition
+//                   "
+//                 >
+//                   Logout
+//                 </button>
+//               </>
+//             ) : (
+//               <>
+//                 <NavLink
+//                   to="/login"
+//                   className="
+//                     px-6 py-2.5 rounded-sm
+//                     text-sm
+//                     border border-[#c9b27c]
+//                     text-black
+//                     hover:bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c]
+                    
+                
+//                     transition
+//                   "
+//                 >
+//                   Login
+//                 </NavLink>
+
+//                 <NavLink
+//                   to="/register"
+//                   className="
+//                     px-6 py-2.5 rounded-sm
+//                     text-sm
+//                     bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c]
+//                     text-[#0b0b0b]
+//                   "
+//                 >
+//                   Signup
+//                 </NavLink>
+//               </>
+//             )}
+//           </div>
+
+//         </div>
+//       </div>
+//     </header>
+//   );
+// };
+
+// export default Navbar;
+
+
+
+import React, { useContext, useState } from 'react';
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import { FaHome } from "react-icons/fa";
+import { Link, NavLink } from 'react-router';
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
-  const { user, signOutUser } = useContext(AuthContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { user, signOutUser } = useContext(AuthContext);
 
   const handleSignOut = () => {
     signOutUser().catch(console.log);
   };
 
-  const linkClass = ({ isActive }) =>
-    `
-    relative px-5 py-2 rounded-sm text-sm tracking-wide transition-all duration-300
-    ${isActive
-      ? "text-[#0b0b0b] bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c] shadow-[0_8px_30px_rgba(143,120,72,0.45)]"
-      : "text-[#1a1a1a] hover:text-[#8f7848] hover:bg-[#f3eddf]"}
-  `;
 
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Add Listing", path: "/add-listing" },
+    { name: "Browse Listing", path: "/browse-listing" },
+    { name: "My Listing", path: "/my-listing" },
+  ];
+
+
+     
+
+
+  
   return (
-    <header className="
-      sticky top-0 z-[999]
-      backdrop-blur-2xl
-      bg-white/80
-      border-b border-[#e6dbc3]
-      shadow-[0_12px_60px_rgba(143,120,72,0.25)]
-    ">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+    
+      <div className="bg-white shadow-md sticky top-0 z-50">
+      <div className="max-w-[1600px] mx-auto px-4 py-3 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2">
+          <img
+            src="https://i.ibb.co/WWBSf9ns/istockphoto-1884947552-612x612.jpg"
+            alt="logo"
+            className="w-10 h-10 rounded-full"
+          />
+          <span className="text-2xl font-bold text-blue-700">RoomieFind</span>
+        </Link>
 
-          {/* LEFT */}
-          <div className="flex items-center gap-3">
-            {/* Mobile */}
-            <div className="dropdown lg:hidden">
-              <label tabIndex={0} className="
-                btn btn-ghost rounded-full
-                hover:bg-[#f3eddf]
-              ">
-                <svg className="w-6 h-6 text-[#8f7848]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                    d="M4 6h16M4 12h10M4 18h16" />
-                </svg>
-              </label>
+        <div className="md:hidden">
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
 
-              <ul tabIndex={0} className="
-                menu dropdown-content mt-3 w-56
-                rounded-3xl
-                bg-[#fdfbf7]
-                border border-[#e2d6bf]
-                shadow-[0_30px_90px_rgba(143,120,72,0.35)]
-                p-3
-              ">
-                <li><NavLink to="/" className={linkClass}>Home</NavLink></li>
-                <li><NavLink to="/add-listing" className={linkClass}>Add Listing</NavLink></li>
-                <li><NavLink to="/browse-listing" className={linkClass}>Browse</NavLink></li>
-                <li><NavLink to="/my-listing" className={linkClass}>My Listing</NavLink></li>
-              </ul>
-            </div>
+        <nav className="hidden md:flex gap-6 text-gray-700 font-medium">
+          {navItems.map(({ name, path }) => (
+            <NavLink
+              key={path}
+              to={path}
+              className="relative group transition duration-300 hover:text-blue-600"
+            >
+              {({ isActive }) => (
+                <span>
+                  {name}
+                  <span
+                    className={`absolute left-0 -bottom-1 h-0.5 bg-blue-600 transition-all ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  ></span>
+                  
+                </span>
+                
+              )}
+            </NavLink>
+            
+          ))}
+          <div>
+          <label className="swap swap-rotate">
+            <input
+              type="checkbox"
+              className="theme-controller"
+              value="coffee"
+            />
+            {/* <FaMoon className="swap-on h-6 w-6" />
+            <IoMdSunny className="swap-off h-6 w-6" /> */}
+          </label>
+          {/* <input
+            type="checkbox"
+            value="dark"
+            checked={isDark}
+            onChange={handleChange}
+            className="toggle theme-controller"
+          /> */}
+        </div>
+        </nav>
+        
 
-            {/* LOGO */}
-            <div className="flex items-center gap-2 cursor-pointer">
-              <div className="
-                w-10 h-10 rounded-2xl
-                bg-gradient-to-br from-[#c9b27c] to-[#8f7848]
-                grid place-items-center
-                shadow-[0_10px_40px_rgba(143,120,72,0.6)]
-              ">
-                <span className="text-black font-bold text-lg"><FaHome></FaHome></span>
-              </div>
-
-              <span className="text-xl md:text-2xl font-semibold tracking-wide text-[#0b0b0b]">
-                Find
-                <span className="text-[#8f7848]">Roomy</span>
-              </span>
-            </div>
-          </div>
-
-          {/* CENTER */}
-          <nav className="hidden lg:flex gap-2">
-            <NavLink to="/" className={linkClass}>Home</NavLink>
-            <NavLink to="/add-listing" className={linkClass}>Add Listing</NavLink>
-            <NavLink to="/browse-listing" className={linkClass}>Browse</NavLink>
-            <NavLink to="/my-listing" className={linkClass}>My Listing</NavLink>
-          </nav>
-
-          {/* RIGHT */}
-          <div className="flex items-center gap-4">
-            {user ? (
-              <>
-                {/* USER */}
-                <div className="relative group">
-                  <img
-                    src={user.photoURL}
-                    alt="user"
-                    className="
-                      w-11 h-11 rounded-full
-                      ring-2 ring-[#e2d6bf]
-                      group-hover:ring-[#8f7848]
-                      transition
-                    "
-                  />
-                  <div className="
-                    absolute -bottom-14 left-1/2 -translate-x-1/2
-                    opacity-0 group-hover:opacity-100
-                    bg-[#0b0b0b] text-white
-                    text-xs px-4 py-2 rounded-full
-                    shadow-lg transition
-                  ">
-                    {user.displayName || "User"}
-                  </div>
-                </div>
-
-                {/* LOGOUT */}
+        <div className="hidden md:block">
+          {user ? (
+            <div className="group relative cursor-pointer">
+              <img
+                src={user.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"}
+                alt="profile"
+                className="w-10 h-10 rounded-full border-2 border-blue-500"
+              />
+              <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200 z-50">
+                <p className="px-4 py-2 text-sm text-gray-700 font-semibold border-b">
+                  {user.displayName || "Unknown User"}
+                </p>
                 <button
                   onClick={handleSignOut}
-                  className="
-                    px-6 py-2.5 rounded-full
-                    text-sm font-medium tracking-wide
-                    bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c]
-                    text-[#0b0b0b]
-                    shadow-[0_12px_40px_rgba(143,120,72,0.55)]
-                    hover:scale-105 transition
-                  "
+                  className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                 >
                   Logout
                 </button>
-              </>
-            ) : (
-              <>
-                <NavLink
-                  to="/login"
-                  className="
-                    px-6 py-2.5 rounded-sm
-                    text-sm
-                    border border-[#c9b27c]
-                    text-black
-                    hover:bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c]
-                    
-                
-                    transition
-                  "
-                >
+              </div>
+            </div>
+          ) : (
+            <div className="space-x-2">
+              <Link to="/login">
+                <button className="btn btn-outline btn-primary px-6">
                   Login
-                </NavLink>
-
-                <NavLink
-                  to="/register"
-                  className="
-                    px-6 py-2.5 rounded-sm
-                    text-sm
-                    bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c]
-                    text-[#0b0b0b]
-                  "
-                >
-                  Signup
-                </NavLink>
-              </>
-            )}
-          </div>
-
+                </button>
+              </Link>
+              <Link to="/register">
+                <button className="btn btn-outline btn-primary px-6">
+                  Register
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
-    </header>
+
+      {isMenuOpen && (
+        <div className="md:hidden bg-white px-4 pb-4 space-y-4 shadow-lg">
+          <nav className="flex flex-col gap-3 text-gray-700 font-medium">
+            {navItems.map(({ name, path }) => (
+              <NavLink
+                key={path}
+                to={path}
+                onClick={() => setIsMenuOpen(false)}
+                className={({ isActive }) =>
+                  `px-2 py-1 rounded hover:bg-blue-50 ${
+                    isActive ? "text-blue-600 font-semibold" : ""
+                  }`
+                }
+              >
+                {name}
+              </NavLink>
+            ))}
+          </nav>
+          <div>
+            {user ? (
+              <div className="mt-4 flex items-center justify-between border-t pt-4">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={user.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"}
+                    alt="user"
+                    className="w-10 h-10 rounded-full border"
+                  />
+                  <p className="text-gray-700 text-sm font-medium">
+                    {user.displayName || "Unknown User"}
+                  </p>
+                </div>
+                <button
+                  onClick={() => {
+                    
+                    setIsMenuOpen(false);
+                  }}
+                  className="text-sm text-red-500"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-2 mt-4">
+                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                  <button className="btn btn-outline btn-primary w-full">
+                    Login
+                  </button>
+                </Link>
+                <Link to="/register" onClick={() => setIsMenuOpen(false)}>
+                  <button className="btn btn-outline btn-primary w-full">
+                    Register
+                  </button>
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+    
   );
 };
 
