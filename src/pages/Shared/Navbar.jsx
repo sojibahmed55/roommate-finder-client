@@ -435,9 +435,19 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { user, signOutUser } = useContext(AuthContext);
 
+  // const handleSignOut = () => {
+  //   signOutUser().catch(console.log);
+  // };
+
   const handleSignOut = () => {
-    signOutUser().catch(console.log);
-  };
+        signOutUser()
+        .then(()=> {
+            console.log('sign out user');
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
 
 
   const navItems = [
@@ -594,12 +604,12 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex gap-2 mt-4">
-                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/login">
                   <button className="btn btn-outline btn-primary w-full">
                     Login
                   </button>
                 </Link>
-                <Link to="/register" onClick={() => setIsMenuOpen(false)}>
+                <Link to="/register">
                   <button className="btn btn-outline btn-primary w-full">
                     Register
                   </button>
