@@ -1,9 +1,11 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import SocialLogin from "../Shared/SocialLogin";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const { signInUser } = use(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +58,34 @@ const Login = () => {
             />
           </div>
 
-          <div>
+          <div className="relative">
+            <label className="text-sm font-medium text-[#5c5130]">
+              Password
+            </label>
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Enter password"
+              required
+              className="
+                          w-full px-4 py-3 border border-gray-300 rounded-md text-black
+                        "
+            />
+
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="
+                          absolute right-3 top-[40px]
+                          text-[#8f7848]
+                          cursor-pointer
+                          hover:opacity-80
+                        "
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+
+          {/* <div>
             <label className="text-sm font-medium text-[#5c5130]">
               Password
             </label>
@@ -67,7 +96,7 @@ const Login = () => {
               className="w-full px-4 py-3 border border-gray-300 rounded-md text-black"
               required
             />
-          </div>
+          </div> */}
 
           <div className="pt-2">
             <button

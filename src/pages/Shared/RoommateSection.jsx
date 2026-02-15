@@ -4,7 +4,7 @@ import { FaHome, FaMapMarkedAlt, FaShieldAlt, FaUserFriends } from "react-icons/
 const RoommateSection = () => {
   return (
     <div>
-      <section className="py-24 bg-[#fdfbf7]">
+      <section className="py-24">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Heading */}

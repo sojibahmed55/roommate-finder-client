@@ -10,7 +10,7 @@ import Login from '../pages/Login/Login';
 import MyListing from '../Components/MyListing/MyListing';
 import RoommateUpdate from '../Components/RoommateUpdate/RoommateUpdate';
 import Details from '../Components/Details/Details';
-// import RequireAuth from '../contexts/RequireAuth/RequireAuth';
+import RequireAuth from '../contexts/RequireAuth/RequireAuth';
 
 
 const router = createBrowserRouter([
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/my-listing',
-                element: <MyListing></MyListing>
+                element: <RequireAuth><MyListing></MyListing></RequireAuth>,
             },
             // {
             //     path: '/details/:id',

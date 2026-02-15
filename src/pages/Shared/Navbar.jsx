@@ -837,7 +837,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-[100] w-full border-b border-gray-200/50 dark:border-gray-800 bg-white/80 dark:bg-slate-950/90 backdrop-blur-md">
+      <header className="sticky top-0 z-[100] w-full border-b border-gray-200/50 dark:border-gray-800 bg-white dark:bg-slate-950/90 backdrop-blur-md">
         <div className="max-w-[1600px] mx-auto px-4 md:px-8 h-16 md:h-16 flex items-center gap-36 justify-center">
           
           {/* --- LOGO --- */}
@@ -846,7 +846,7 @@ const Navbar = () => {
                <img
                 src="https://i.ibb.co.com/5gsY8v7V/huy-nguyen-AB-q9lw-CVv8-unsplash.jpg"
                 alt="logo"
-                className="w-full h-full rounded-xl object-cover border-2 border-blue-600"
+                className="w-full h-full rounded-xl object-cover border-2 border-[#e3d8c2]"
               />
             </div>
             <span className="text-xl md:text-2xl font-black tracking-tight dark:text-white">
@@ -858,18 +858,53 @@ const Navbar = () => {
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map(({ name, path }) => (
               <NavLink
-                key={path}
-                to={path}
-                className={({ isActive }) =>
-                  `px-5 py-2 text-[15px] font-semibold rounded-full transition-all duration-300 ${
-                    isActive
-                      ? "bg-blue-50 text-blue-600 dark:bg-blue-600/10 dark:text-blue-400"
-                      : "text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white"
-                  }`
-                }
-              >
-                {name}
-              </NavLink>
+  key={path}
+  to={path}
+  className={({ isActive }) =>
+    `relative px-5 py-3 text-[15px] font-semibold tracking-wide 
+     transition-all duration-300 rounded-md
+     ${
+       isActive
+         ? "text-[#e3d8c2]"
+         : "text-gray-600 dark:text-gray-400 hover:text-[#1f1a14] hover:bg-[#e3d8c2]/30"
+     }`
+  }
+>
+  {({ isActive }) => (
+    <span className="relative">
+      {name}
+
+      {/* Premium Underline */}
+      <span
+        className={`
+          absolute left-0 -bottom-1 h-[2.5px] rounded-full
+          transition-all duration-300
+          ${
+            isActive
+              ? "w-full bg-[#e3d8c2] shadow-[0_4px_15px_rgba(227,216,194,0.7)]"
+              : "w-0 bg-[#e3d8c2] group-hover:w-full"
+          }
+        `}
+      ></span>
+    </span>
+  )}
+</NavLink>
+
+
+
+              // <NavLink
+              //   key={path}
+              //   to={path}
+              //   className={({ isActive }) =>
+              //     `px-5 py-2 text-[15px] font-semibold rounded-full transition-all duration-300 ${
+              //       isActive
+              //         ? "bg-blue-50 text-blue-600 dark:bg-blue-600/10 dark:text-blue-400"
+              //         : "text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white"
+              //     }`
+              //   }
+              // >
+              //   {name}
+              // </NavLink>
             ))}
           </nav>
 
@@ -912,28 +947,13 @@ const Navbar = () => {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Link to="/login" className="btn 
-border border-[#e3d8c2] 
-bg-transparent 
-text-[#2f2a22] 
-dark:border-[#e3d8c2]/70 
-dark:text-[#e3d8c2] 
-hover:bg-[#e3d8c2] 
-hover:text-[#2f2a22] 
-hover:border-[#e3d8c2] 
-transition-colors duration-300">Login</Link>
+                  {/* <Link to="/login" className="btn border border-[#e3d8c2] bg-transparent text-[#2f2a22] dark:border-[#e3d8c2]/70 dark:text-[#e3d8c2] hover:bg-[#e3d8c2] hover:text-[#2f2a22] hover:border-[#e3d8c2] transition-colors duration-300">Login</Link> */}
+                  <Link to="/login" className="btn border border-[#e3d8c2] bg-transparent text-[#dbc187] dark:border-white/70 dark:text-white hover:bg-[#e3d8c2] hover:text-black hover:border-[#e3d8c2] transition-colors">Login</Link>
                   <Link to="/register">
-                    <button className="btn border border-[#e3d8c2] 
-bg-[#e3d8c2] 
-text-[#2f2a22] 
-dark:bg-[#e3d8c2] 
-dark:text-[#2f2a22] 
-hover:bg-transparent 
-hover:text-[#2f2a22] 
-hover:border-[#e3d8c2] 
-dark:hover:bg-[#e3d8c2] 
-dark:hover:text-[#2f2a22] 
-transition-colors duration-300">
+                    {/* <button className="btn border border-[#e3d8c2] bg-[#e3d8c2] text-[#2f2a22] dark:bg-[#e3d8c2] dark:text-[#2f2a22] hover:bg-transparent hover:text-[#2f2a22] hover:border-[#e3d8c2] dark:hover:bg-[#e3d8c2] dark:hover:text-[#2f2a22] transition-colors duration-300">
+                      Sign Up
+                    </button> */}
+                    <button className="btn  border border-[#e3d8c2] bg-[#e3d8c2] text-black dark:bg-[#e3d8c2] dark:text-white hover:bg-transparent hover:text-[#e3d8c2] hover:border-[#e3d8c2] dark:hover:bg-[#e3d8c2] dark:hover:text-black transition-colors">
                       Sign Up
                     </button>
                   </Link>
@@ -1000,11 +1020,18 @@ transition-colors duration-300">
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-3">
-                  <Link to="/login" className="w-full">
+                  
+                  {/* <Link onClick={() => setIsMenuOpen (false)} to="/login" className="w-full">
                     <button className="w-full py-3 text-sm font-bold btn border border-[#e3d8c2] bg-[#e3d8c2] text-[#2f2a22] dark:bg-[#e3d8c2] dark:text-[#2f2a22] hover:bg-transparent hover:text-[#2f2a22] hover:border-[#e3d8c2] dark:hover:bg-[#e3d8c2] dark:hover:text-[#2f2a22] transition-colors duration-300">Login</button>
+                  </Link> */}
+                  <Link onClick={() => setIsMenuOpen (false)} to="/login" className="w-full">
+                    <button className="w-full py-3 btn border border-[#e3d8c2] bg-transparent text-[#dbc187]">Login</button>
                   </Link>
+                  {/* <Link to="/register" className="w-full">
+                    <button onClick={() => setIsMenuOpen (false)} className="w-full py-3 text-sm font-bold btn border border-[#e3d8c2] bg-transparent text-[#2f2a22] dark:border-[#e3d8c2]/70 dark:text-[#e3d8c2] hover:bg-[#e3d8c2] hover:text-[#2f2a22] hover:border-[#e3d8c2] transition-colors duration-300">Sign Up</button>
+                  </Link> */}
                   <Link to="/register" className="w-full">
-                    <button className="w-full py-3 text-sm font-bold btn border border-[#e3d8c2] bg-transparent text-[#2f2a22] dark:border-[#e3d8c2]/70 dark:text-[#e3d8c2] hover:bg-[#e3d8c2] hover:text-[#2f2a22] hover:border-[#e3d8c2] transition-colors duration-300">Sign Up</button>
+                    <button onClick={() => setIsMenuOpen (false)} className="w-full py-3 btn  border border-[#e3d8c2] bg-[#e3d8c2] text-black">Sign Up</button>
                   </Link>
                 </div>
               )}
