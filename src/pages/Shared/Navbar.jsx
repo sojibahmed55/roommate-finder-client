@@ -25,9 +25,6 @@
 
 //     </>
 
-
-
-
 //     return (
 //         <div className="navbar bg-base-100 shadow-sm">
 //             <div className="navbar-start">
@@ -160,7 +157,6 @@
 
 // export default Navbar;
 
-
 // import React, { useContext } from 'react';
 // import { NavLink } from 'react-router';
 // import { AuthContext } from '../../contexts/AuthContext/AuthContext';
@@ -225,7 +221,7 @@
 //                             />
 
 //                             {/* HOVER TOOLTIP (displayName) */}
-//                             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 
+//                             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100
 //                             transition-all bg-gray-800 text-white text-sm px-3 py-1 rounded shadow-lg whitespace-nowrap">
 //                                 {user.displayName || "No Name"}
 //                             </div>
@@ -253,7 +249,6 @@
 // };
 
 // export default Navbar;
-
 
 // import React, { useContext } from "react";
 // import { NavLink } from "react-router";
@@ -308,11 +303,11 @@
 //                 shadow-[0_30px_90px_rgba(143,120,72,0.35)]
 //                 p-3
 //               ">
-              //   <li><NavLink to="/" className={linkClass}>Home</NavLink></li>
-              //   <li><NavLink to="/add-listing" className={linkClass}>Add Listing</NavLink></li>
-              //   <li><NavLink to="/browse-listing" className={linkClass}>Browse</NavLink></li>
-              //   <li><NavLink to="/my-listing" className={linkClass}>My Listing</NavLink></li>
-              // </ul>
+//   <li><NavLink to="/" className={linkClass}>Home</NavLink></li>
+//   <li><NavLink to="/add-listing" className={linkClass}>Add Listing</NavLink></li>
+//   <li><NavLink to="/browse-listing" className={linkClass}>Browse</NavLink></li>
+//   <li><NavLink to="/my-listing" className={linkClass}>My Listing</NavLink></li>
+// </ul>
 //             </div>
 
 //             {/* LOGO */}
@@ -393,8 +388,7 @@
 //                     border border-[#c9b27c]
 //                     text-black
 //                     hover:bg-gradient-to-r from-[#e6dbc3] to-[#c9b27c]
-                    
-                
+
 //                     transition
 //                   "
 //                 >
@@ -424,8 +418,6 @@
 
 // export default Navbar;
 
-
-
 // import React, { useContext, useState } from 'react';
 // import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 // import { Link, NavLink } from 'react-router';
@@ -449,7 +441,6 @@
 //         })
 //     }
 
-
 //   const navItems = [
 //     { name: "Home", path: "/" },
 //     { name: "Add Listing", path: "/add-listing" },
@@ -457,13 +448,8 @@
 //     { name: "My Listing", path: "/my-listing" },
 //   ];
 
-
-     
-
-
-  
 //   return (
-    
+
 //       <div className="bg-white shadow-md sticky top-0 z-50">
 //       <div className="max-w-[1600px] mx-auto px-4 py-3 flex items-center justify-between">
 //         <Link to="/" className="flex items-center gap-2">
@@ -496,16 +482,15 @@
 //                       isActive ? "w-full" : "w-0 group-hover:w-full"
 //                     }`}
 //                   ></span>
-                  
+
 //                 </span>
-                
+
 //               )}
 //             </NavLink>
-            
+
 //           ))}
-          
+
 //         </nav>
-        
 
 //         <div className="hidden md:block">
 //           {user ? (
@@ -577,7 +562,7 @@
 //                 </div>
 //                 <button
 //                   onClick={() => {
-                    
+
 //                     setIsMenuOpen(false);
 //                   }}
 //                   className="text-sm text-red-500"
@@ -603,12 +588,11 @@
 //         </div>
 //       )}
 //     </div>
-    
+
 //   );
 // };
 
 // export default Navbar;
-
 
 // import React, { useContext, useState, useEffect } from "react";
 // import { AuthContext } from "../../contexts/AuthContext/AuthContext";
@@ -644,7 +628,7 @@
 //   return (
 //     <div className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
 //       <div className="max-w-[1600px] mx-auto px-4 py-3 flex items-center justify-between">
-        
+
 //         {/* Logo */}
 //         <Link to="/" className="flex items-center gap-3">
 //           <img
@@ -679,7 +663,7 @@
 
 //         {/* Right Side */}
 //         <div className="hidden md:flex items-center gap-4">
-          
+
 //           {/* Theme Toggle */}
 //           <button
 //             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
@@ -799,31 +783,32 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import { Link, NavLink } from "react-router";
-import { Menu, X, Sun, Moon, LogOut} from "lucide-react";
+import { Menu, X, Sun, Moon, LogOut } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  // const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const { user, signOutUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  // useEffect(() => {
+  //   if (theme === "dark") {
+  //     document.documentElement.classList.add("dark");
+  //   } else {
+  //     document.documentElement.classList.remove("dark");
+  //   }
+  //   localStorage.setItem("theme", theme);
+  // }, [theme]);
 
   const handleSignOut = () => {
-        signOutUser()
-        .then(()=> {
-            console.log('sign out user');
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    }
+    signOutUser()
+      .then(() => {
+        console.log("sign out user");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   // const handleSignOut = () => {
   //   signOutUser().catch(console.log);
   // };
@@ -837,13 +822,22 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-[100] w-full border-b border-gray-200/50 dark:border-gray-800 bg-white dark:bg-slate-950/90 backdrop-blur-md">
+      {/* <header className="sticky top-0 z-[100] w-full border-b border-gray-200/50 dark:border-gray-800 bg-white dark:bg-slate-950/90 backdrop-blur-md"> */}
+      <header
+        className="sticky top-0 z-50 
+bg-white dark:bg-slate-950
+
+border-b border-gray-200 dark:border-gray-800 
+transition-colors duration-300"
+      >
         <div className="max-w-[1600px] mx-auto px-4 md:px-8 h-16 md:h-16 flex items-center gap-36 justify-center">
-          
           {/* --- LOGO --- */}
-          <Link to="/" className="flex items-center gap-2 group transition-transform active:scale-95">
+          <Link
+            to="/"
+            className="flex items-center gap-2 group transition-transform active:scale-95"
+          >
             <div className="w-10 h-10 rounded-xl bg-[#e3d8c2] flex items-center justify-center shadow-lg shadow-[#e3d4c2]-500/30 group-hover:rotate-6 transition-all">
-               <img
+              <img
                 src="https://i.ibb.co.com/5gsY8v7V/huy-nguyen-AB-q9lw-CVv8-unsplash.jpg"
                 alt="logo"
                 className="w-full h-full rounded-xl object-cover border-2 border-[#e3d8c2]"
@@ -858,25 +852,25 @@ const Navbar = () => {
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map(({ name, path }) => (
               <NavLink
-  key={path}
-  to={path}
-  className={({ isActive }) =>
-    `relative px-5 py-3 text-[15px] font-semibold tracking-wide 
+                key={path}
+                to={path}
+                className={({ isActive }) =>
+                  `relative px-5 py-3 text-[15px] font-semibold tracking-wide 
      transition-all duration-300 rounded-md
      ${
        isActive
          ? "text-[#e3d8c2]"
          : "text-gray-600 dark:text-gray-400 hover:text-[#1f1a14] hover:bg-[#e3d8c2]/30"
      }`
-  }
->
-  {({ isActive }) => (
-    <span className="relative">
-      {name}
+                }
+              >
+                {({ isActive }) => (
+                  <span className="relative">
+                    {name}
 
-      {/* Premium Underline */}
-      <span
-        className={`
+                    {/* Premium Underline */}
+                    <span
+                      className={`
           absolute left-0 -bottom-1 h-[2.5px] rounded-full
           transition-all duration-300
           ${
@@ -885,12 +879,10 @@ const Navbar = () => {
               : "w-0 bg-[#e3d8c2] group-hover:w-full"
           }
         `}
-      ></span>
-    </span>
-  )}
-</NavLink>
-
-
+                    ></span>
+                  </span>
+                )}
+              </NavLink>
 
               // <NavLink
               //   key={path}
@@ -911,12 +903,17 @@ const Navbar = () => {
           {/* --- RIGHT ACTIONS --- */}
           <div className="flex items-center gap-2 md:gap-4">
             {/* Theme Toggle */}
-            <button
+            <ThemeToggle></ThemeToggle>
+            {/* <button
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
               className="p-2.5 cursor-pointer rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-gray-600 dark:text-gray-400"
             >
-              {theme === "light" ? <Moon size={18} /> : <Sun size={18} className="text-yellow-500 " />}
-            </button>
+              {theme === "light" ? (
+                <Moon size={18} />
+              ) : (
+                <Sun size={18} className="text-yellow-500 " />
+              )}
+            </button> */}
 
             {/* Auth/Profile */}
             <div className="hidden md:block">
@@ -928,19 +925,28 @@ const Navbar = () => {
                       className="w-8 h-8 rounded-full object-cover"
                       alt="avatar"
                     />
-                    <span className="text-sm font-bold dark:text-gray-200">{user.displayName?.split(' ')[0]}</span>
+                    <span className="text-sm font-bold dark:text-gray-200">
+                      {user.displayName?.split(" ")[0]}
+                    </span>
                   </button>
-                  
+
                   {/* Dropdown Menu */}
                   <div className="absolute right-0 mt-3 w-56 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-200 z-[110]">
                     <div className="px-4 py-3 border-b dark:border-gray-800">
-                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Signed in as</p>
-                      <p className="text-sm font-bold truncate dark:text-white">{user.email}</p>
+                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                        Signed in as
+                      </p>
+                      <p className="text-sm font-bold truncate dark:text-white">
+                        {user.email}
+                      </p>
                     </div>
                     {/* <Link to="/dashboard" className="flex items-center gap-3 px-4 py-3 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                       <LayoutDashboard size={16} /> Dashboard
                     </Link> */}
-                    <button onClick={handleSignOut} className="w-full flex items-center cursor-pointer gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
+                    <button
+                      onClick={handleSignOut}
+                      className="w-full flex items-center cursor-pointer gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors"
+                    >
                       <LogOut size={16} /> Log Out
                     </button>
                   </div>
@@ -948,7 +954,12 @@ const Navbar = () => {
               ) : (
                 <div className="flex items-center gap-2">
                   {/* <Link to="/login" className="btn border border-[#e3d8c2] bg-transparent text-[#2f2a22] dark:border-[#e3d8c2]/70 dark:text-[#e3d8c2] hover:bg-[#e3d8c2] hover:text-[#2f2a22] hover:border-[#e3d8c2] transition-colors duration-300">Login</Link> */}
-                  <Link to="/login" className="btn border border-[#e3d8c2] bg-transparent text-[#dbc187] dark:border-white/70 dark:text-white hover:bg-[#e3d8c2] hover:text-black hover:border-[#e3d8c2] transition-colors">Login</Link>
+                  <Link
+                    to="/login"
+                    className="btn border border-[#e3d8c2] bg-transparent text-[#dbc187] dark:border-white/70 dark:text-white hover:bg-[#e3d8c2] hover:text-black hover:border-[#e3d8c2] transition-colors"
+                  >
+                    Login
+                  </Link>
                   <Link to="/register">
                     {/* <button className="btn border border-[#e3d8c2] bg-[#e3d8c2] text-[#2f2a22] dark:bg-[#e3d8c2] dark:text-[#2f2a22] hover:bg-transparent hover:text-[#2f2a22] hover:border-[#e3d8c2] dark:hover:bg-[#e3d8c2] dark:hover:text-[#2f2a22] transition-colors duration-300">
                       Sign Up
@@ -973,16 +984,28 @@ const Navbar = () => {
       </header>
 
       {/* --- MOBILE SIDEBAR DRAWER --- */}
-      <div className={`fixed inset-0 z-[150] lg:hidden transition-opacity duration-300 ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+      <div
+        className={`fixed inset-0 z-[150] lg:hidden transition-opacity duration-300 ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+      >
         {/* Backdrop overlay */}
-        <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)}></div>
-        
+        <div
+          className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"
+          onClick={() => setIsMenuOpen(false)}
+        ></div>
+
         {/* Sidebar Content */}
-        <div className={`absolute right-0 top-0 h-full w-[280px] bg-white dark:bg-slate-900 shadow-2xl transition-transform duration-300 ease-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
+        <div
+          className={`absolute right-0 top-0 h-full w-[280px] bg-white dark:bg-slate-900 shadow-2xl transition-transform duration-300 ease-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+        >
           <div className="p-6 flex flex-col h-full">
             <div className="flex items-center justify-between mb-10">
               <span className="font-black text-xl dark:text-white">Menu</span>
-              <button onClick={() => setIsMenuOpen(false)} className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500"><X size={20}/></button>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-500"
+              >
+                <X size={20} />
+              </button>
             </div>
 
             <nav className="flex flex-col gap-2">
@@ -993,8 +1016,8 @@ const Navbar = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className={({ isActive }) =>
                     `flex items-center px-4 py-3.5 rounded-2xl font-bold transition-all ${
-                      isActive 
-                        ? "bg-[#e3d8c2] text-black shadow-lg shadow-[#a08e6a]/30" 
+                      isActive
+                        ? "bg-[#e3d8c2] text-black shadow-lg shadow-[#a08e6a]/30"
                         : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                     }`
                   }
@@ -1008,30 +1031,51 @@ const Navbar = () => {
               {user ? (
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 px-2">
-                    <img src={user.photoURL} className="w-10 h-10 rounded-full border-2 border-blue-500 p-0.5" alt="user" />
+                    <img
+                      src={user.photoURL}
+                      className="w-10 h-10 rounded-full border-2 border-blue-500 p-0.5"
+                      alt="user"
+                    />
                     <div>
-                      <p className="font-bold dark:text-white text-sm">{user.displayName}</p>
-                      <p className="text-xs text-gray-500 truncate w-32">{user.email}</p>
+                      <p className="font-bold dark:text-white text-sm">
+                        {user.displayName}
+                      </p>
+                      <p className="text-xs text-gray-500 truncate w-32">
+                        {user.email}
+                      </p>
                     </div>
                   </div>
-                  <button onClick={handleSignOut} className="w-full py-3.5 bg-red-50 dark:bg-red-500/10 text-red-500 rounded-2xl font-bold text-sm active:scale-95 transition-all">
+                  <button
+                    onClick={handleSignOut}
+                    className="w-full py-3.5 bg-red-50 dark:bg-red-500/10 text-red-500 rounded-2xl font-bold text-sm active:scale-95 transition-all"
+                  >
                     Log Out
                   </button>
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-3">
-                  
                   {/* <Link onClick={() => setIsMenuOpen (false)} to="/login" className="w-full">
                     <button className="w-full py-3 text-sm font-bold btn border border-[#e3d8c2] bg-[#e3d8c2] text-[#2f2a22] dark:bg-[#e3d8c2] dark:text-[#2f2a22] hover:bg-transparent hover:text-[#2f2a22] hover:border-[#e3d8c2] dark:hover:bg-[#e3d8c2] dark:hover:text-[#2f2a22] transition-colors duration-300">Login</button>
                   </Link> */}
-                  <Link onClick={() => setIsMenuOpen (false)} to="/login" className="w-full">
-                    <button className="w-full py-3 btn border border-[#e3d8c2] bg-transparent text-[#dbc187]">Login</button>
+                  <Link
+                    onClick={() => setIsMenuOpen(false)}
+                    to="/login"
+                    className="w-full"
+                  >
+                    <button className="w-full py-3 btn border border-[#e3d8c2] bg-transparent text-[#dbc187]">
+                      Login
+                    </button>
                   </Link>
                   {/* <Link to="/register" className="w-full">
                     <button onClick={() => setIsMenuOpen (false)} className="w-full py-3 text-sm font-bold btn border border-[#e3d8c2] bg-transparent text-[#2f2a22] dark:border-[#e3d8c2]/70 dark:text-[#e3d8c2] hover:bg-[#e3d8c2] hover:text-[#2f2a22] hover:border-[#e3d8c2] transition-colors duration-300">Sign Up</button>
                   </Link> */}
                   <Link to="/register" className="w-full">
-                    <button onClick={() => setIsMenuOpen (false)} className="w-full py-3 btn  border border-[#e3d8c2] bg-[#e3d8c2] text-black">Sign Up</button>
+                    <button
+                      onClick={() => setIsMenuOpen(false)}
+                      className="w-full py-3 btn  border border-[#e3d8c2] bg-[#e3d8c2] text-black"
+                    >
+                      Sign Up
+                    </button>
                   </Link>
                 </div>
               )}

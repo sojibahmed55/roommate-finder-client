@@ -9,10 +9,10 @@ const RoommateSection = () => {
 
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-semibold text-[#1b1b1b] mb-4">
+          <h2 className="text-4xl font-semibold text-[#1b1b1b] dark:text-gray-300 mb-4">
             Find Your Perfect Roommate
           </h2>
-          <p className="text-[#6b5a34] max-w-xl mx-auto">
+          <p className="text-[#6b5a34] max-w-xl mx-auto dark:text-white">
             Smart matching, verified listings and a premium experience built
             for modern living.
           </p>
@@ -48,7 +48,7 @@ const RoommateSection = () => {
               key={index}
               className="
                 group
-                bg-white
+                
                 border border-[#e3d8c2]
                 rounded-3xl
                 p-8
@@ -75,11 +75,11 @@ const RoommateSection = () => {
                 {item.icon}
               </div>
 
-              <h3 className="text-lg font-semibold text-[#1b1b1b] mb-3">
+              <h3 className="text-lg font-semibold text-[#1b1b1b] mb-3 dark:text-white">
                 {item.title}
               </h3>
 
-              <p className="text-sm text-[#6b5a34] leading-relaxed">
+              <p className="text-sm text-[#6b5a34] leading-relaxed dark:text-gray-400">
                 {item.text}
               </p>
             </div>

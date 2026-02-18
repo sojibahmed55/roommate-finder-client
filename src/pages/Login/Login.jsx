@@ -67,11 +67,8 @@ const Login = () => {
               name="password"
               placeholder="Enter password"
               required
-              className="
-                          w-full px-4 py-3 border border-gray-300 rounded-md text-black
-                        "
+              className="w-full px-4 py-3 border border-gray-300 rounded-md text-black"
             />
-
             <span
               onClick={() => setShowPassword(!showPassword)}
               className="
