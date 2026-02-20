@@ -9,7 +9,7 @@ import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-[#1f1a14]  text-[#e3d8c2] pt-20 pb-10 overflow-hidden">
+    <footer className="relative bg-gray-500 dark:bg-[#1f1a14]  text-[#e3d8c2] pt-20 pb-10 overflow-hidden">
 
       {/* soft glow background */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-[#e3d8c2]/20 blur-[120px] rounded-full pointer-events-none"></div>
@@ -102,6 +102,9 @@ const Footer = () => {
     </footer>
   );
 };
+
+
+
 
 export default Footer;
 
