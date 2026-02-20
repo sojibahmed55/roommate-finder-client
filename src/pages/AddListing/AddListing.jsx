@@ -5,29 +5,26 @@ import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 const AddListing = () => {
   const { user } = useContext(AuthContext);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     console.log(data);
 
-    fetch('http://localhost:5000/roommate', {
+    fetch("http://localhost:5000/roommate", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then(data => {
+      .then((data) => {
         console.log("data come soon", data);
         if (data.insertedId) {
-          alert('added suceess')
+          alert("added suceess");
         }
-      })
-  }
-
-
-
+      });
+  };
 
   return (
     // <div className="max-w-3xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-lg">
@@ -134,22 +131,30 @@ const AddListing = () => {
     //   </form>
     // </div>
 
-    <div className="min-h-screen flex items-center justify-center  px-4">
-      <div className="w-full max-w-3xl bg-[#fdfbf7] rounded-[28px] shadow-[0_28px_80px_rgba(143,120,72,0.25)] border border-[#e2d6bf] p-8">
-
+    <div className="min-h-screen flex items-center justify-center  px-4 dark:bg-gradient-to-br dark:from-[#0f0e0c] dark:via-[#14120f] dark:to-[#1a1712] transition-colors duration-500 pb-8 pt-8">
+      <div
+        className="w-full max-w-3xl dark:bg-gradient-to-br dark:from-[#1a1611] dark:via-[#1f1a14] dark:to-[#262017]
+dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
+ bg-[#fdfbf7] rounded-[28px] shadow-[0_28px_80px_rgba(143,120,72,0.25)] border border-[#e2d6bf] p-8"
+      >
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-semibold tracking-[0.18em] text-[#161616]">
+          <h2
+            className="text-3xl font-semibold tracking-[0.18em] text-[#161616] dark:text-[#ffffff] 
+        dark:drop-shadow-[0_0_14px_rgba(214,192,138,0.35)]"
+          >
             ADD LISTING
           </h2>
-          <div className="mt-3 h-[1px] w-20 mx-auto bg-[#8f7848]" />
-          <p className="text-sm text-gray-500 mt-3">
+          <div className="mt-3 h-[1px] w-20 mx-auto bg-[#8f7848] dark:bg-gradient-to-r dark:from-transparent dark:via-[#d6c08a] dark:to-transparent" />
+          <p className="text-sm text-gray-500 mt-3 dark:text-[#ffffff]">
             Understated. Premium. Intentional.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-5">
-
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+        >
           {/* Inputs */}
           {[
             { name: "title", placeholder: "Title" },
@@ -170,6 +175,12 @@ const AddListing = () => {
                 focus:ring-1 focus:ring-[#e9dec8]
                 transition-all duration-200
                 placeholder:text-gray-400 text-sm
+                dark:bg-[#1c1914]
+            dark:border-[#3a3226]
+            dark:text-[#ffffff]
+            dark:placeholder:text-gray-400
+            dark:focus:border-[#d6c08a]
+            dark:focus:ring-[#3a3123]
               "
             />
           ))}
@@ -178,9 +189,14 @@ const AddListing = () => {
           <select
             name="roomType"
             required
-            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848]"
+            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+          dark:text-[#ffffff]
+          dark:focus:border-[#d6c08a]
+          transition-all duration-300"
           >
-            <option disabled selected>Room Type</option>
+            <option disabled selected>
+              Room Type
+            </option>
             <option>Single</option>
             <option>Shared</option>
           </select>
@@ -188,9 +204,14 @@ const AddListing = () => {
           <select
             name="lifestylePreferences"
             required
-            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848]"
+            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+          dark:text-[#ffffff]
+          dark:focus:border-[#d6c08a]
+          transition-all duration-300"
           >
-            <option disabled selected>Lifestyle Preference</option>
+            <option disabled selected>
+              Lifestyle Preference
+            </option>
             <option>Pets</option>
             <option>Smoking</option>
             <option>Night Owl</option>
@@ -208,22 +229,36 @@ const AddListing = () => {
               focus:border-[#8f7848]
               focus:ring-1 focus:ring-[#e9dec8]
               text-sm
-            "
+       dark:bg-[#1c1914]
+          dark:border-[#3a3226]
+          dark:text-[#ffffff]
+          dark:placeholder:text-gray-400
+          dark:focus:border-[#d6c08a]
+          dark:focus:ring-[#3a3123]     "
           />
 
           <input
             name="contactInfo"
             placeholder="Contact Info"
             required
-            className="md:col-span-2 px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848]"
+            className="md:col-span-2 px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+          dark:text-[#e6dcc6]
+          dark:placeholder:text-gray-400
+          dark:focus:border-[#d6c08a]
+          transition-all duration-300"
           />
 
           <select
             name="availability"
             required
-            className="md:col-span-2 px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848]"
+            className="md:col-span-2 px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+          dark:text-[#ffffff]
+          dark:focus:border-[#d6c08a]
+          transition-all duration-300"
           >
-            <option disabled selected>Availability</option>
+            <option disabled selected>
+              Availability
+            </option>
             <option>Available</option>
             <option>Not Available</option>
           </select>
@@ -233,14 +268,14 @@ const AddListing = () => {
             name="userEmail"
             defaultValue={user?.email}
             readOnly
-            className="px-4 py-3.5 rounded-[18px] bg-[#f1ede5] text-gray-600 text-sm"
+            className="px-4 py-3.5 rounded-[18px] bg-[#f1ede5] text-gray-600 text-sm dark:bg-[#15120e] dark:text-[#ffffff]"
           />
 
           <input
             name="userName"
             defaultValue={user?.displayName}
             readOnly
-            className="px-4 py-3.5 rounded-[18px] bg-[#f1ede5] text-gray-600 text-sm"
+            className="px-4 py-3.5 rounded-[18px] bg-[#f1ede5] text-gray-600 text-sm dark:bg-[#15120e] dark:text-[#ffffff]"
           />
 
           {/* Button */}
@@ -262,7 +297,6 @@ const AddListing = () => {
         </form>
       </div>
     </div>
-
   );
 };
 

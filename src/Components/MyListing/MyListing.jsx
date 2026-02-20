@@ -16,7 +16,7 @@
 //   }, [user]);
 
 //   const handleDelete = (id) => {
-    
+
 //     fetch(`http://localhost:5000/roommate/${id}`, {
 //       method: "DELETE",
 //     })
@@ -55,8 +55,8 @@
 //                   Update
 //                 </Link>
 
-//                 <button 
-//                   onClick={() => handleDelete(item._id)} 
+//                 <button
+//                   onClick={() => handleDelete(item._id)}
 //                   className="btn btn-error btn-sm"
 //                 >
 //                   Delete
@@ -73,7 +73,6 @@
 
 // export default MyListing;
 
-
 // import { useEffect, useState, useContext } from "react";
 // import { AuthContext } from '../../contexts/AuthContext/AuthContext';
 // import { Link } from "react-router";
@@ -81,7 +80,6 @@
 // import Spinner from "../Spinner/Spinner";
 // import { FaEdit } from "react-icons/fa";
 // import { MdDeleteForever } from "react-icons/md";
-
 
 // const MyListing = () => {
 //   const { user, loading } = useContext(AuthContext);
@@ -216,8 +214,6 @@
 //       </div>
 //     </div>
 
-   
-
 //   );
 // };
 
@@ -239,8 +235,8 @@ const MyListing = () => {
   useEffect(() => {
     if (user?.email) {
       fetch(`http://localhost:5000/roommate-by-email?email=${user.email}`)
-        .then(res => res.json())
-        .then(data => setListings(data));
+        .then((res) => res.json())
+        .then((data) => setListings(data));
     }
   }, [user]);
 
@@ -259,10 +255,10 @@ const MyListing = () => {
         fetch(`http://localhost:5000/roommate/${id}`, {
           method: "DELETE",
         })
-          .then(res => res.json())
-          .then(data => {
+          .then((res) => res.json())
+          .then((data) => {
             if (data.deletedCount > 0) {
-              setListings(listings.filter(item => item._id !== id));
+              setListings(listings.filter((item) => item._id !== id));
               Swal.fire("Deleted!", "Listing has been deleted.", "success");
             }
           });
@@ -281,14 +277,16 @@ const MyListing = () => {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updatedRoommate),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.modifiedCount > 0) {
-          setListings(listings.map(item =>
-            item._id === selectedItem._id
-              ? { ...item, ...updatedRoommate }
-              : item
-          ));
+          setListings(
+            listings.map((item) =>
+              item._id === selectedItem._id
+                ? { ...item, ...updatedRoommate }
+                : item,
+            ),
+          );
           Swal.fire("Updated!", "Listing updated successfully", "success");
           setSelectedItem(null);
         }
@@ -299,11 +297,111 @@ const MyListing = () => {
 
   return (
     <div className="max-w-6xl mx-auto my-12 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-[#c9b27c]">
-        My Listings
-      </h1>
+      <h1 className="text-4xl font-bold mb-8 text-[#c9b27c]">My Listings</h1>
+      <div className="overflow-x-auto rounded-3xl border border-[#8f7848]/30 dark:border-[#8f7848]/40  dark:from-[#14120f] dark:to-[#1b1813]shadow-[0_20px_60px_rgba(143,120,72,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-500">
+        <table className="w-full min-w-[750px] text-sm">
+          {/* Header */}
+          <thead>
+            <tr
+              className="text-[#8f7848] dark:text-[#d6c08a] 
+                     uppercase tracking-[0.15em] text-xs 
+                     border-b border-[#e8dcc4] dark:border-[#2a241c]"
+            >
+              <th className="py-5 px-6 text-left font-semibold">Title</th>
+              <th className="py-5 px-6 text-center font-semibold">Room</th>
+              <th className="py-5 px-6 text-center font-semibold">Rent</th>
+              <th className="py-5 px-6 text-center font-semibold">Location</th>
+              <th className="py-5 px-6 text-center font-semibold">Actions</th>
+            </tr>
+          </thead>
 
-      <div className="overflow-x-auto rounded-3xl border border-[#8f7848] bg-white shadow-xl">
+          <tbody>
+            {listings.map((item) => (
+              <tr
+                key={item._id}
+                className="
+            group
+            border-b border-[#f1e7d2] dark:border-[#1f1a14]
+            hover:bg-gradient-to-r
+            hover:from-[#fdf9f0]
+            hover:to-[#ffffff]
+            dark:hover:from-[#1f1a14]
+            dark:hover:to-[#2a241c]
+            transition-all duration-300
+          "
+              >
+                <td className="px-6 py-5 font-semibold text-[#1a1a1a] dark:text-gray-200">
+                  {item.title}
+                </td>
+
+                <td className="px-6 py-5 text-center font-medium text-[#4a4a4a] dark:text-gray-400">
+                  {item.roomType}
+                </td>
+
+                <td className="px-6 py-5 text-center font-bold text-[#8f7848] dark:text-[#d6c08a] tracking-wide">
+                  $ {item.rent}
+                </td>
+
+                <td className="px-6 py-5 text-center font-medium text-[#555] dark:text-gray-400">
+                  {item.location}
+                </td>
+
+                <td className="px-6 py-5">
+                  <div className="flex justify-center gap-4">
+                    {/* Edit Button */}
+                    <button
+                      onClick={() => setSelectedItem(item)}
+                      className="
+                  w-11 h-11 grid place-items-center
+                  rounded-2xl
+                  border border-[#8f7848]/60
+                  text-[#8f7848]
+                  dark:border-[#d6c08a]/60
+                  dark:text-[#d6c08a]
+                  bg-white dark:bg-[#1a1713]
+                  hover:bg-[#8f7848]
+                  hover:text-black
+                  dark:hover:bg-[#d6c08a]
+                  dark:hover:text-black
+                  transition-all duration-300
+                  shadow-md hover:shadow-xl
+                  hover:scale-105
+                  cursor-pointer
+                "
+                    >
+                      <FaEdit className="text-xl" />
+                    </button>
+
+                    {/* Delete Button */}
+                    <button
+                      onClick={() => handleDelete(item._id)}
+                      className="
+                  w-11 h-11 grid place-items-center
+                  rounded-2xl
+                  border border-red-500/70
+                  text-red-600
+                  dark:border-red-400/60
+                  dark:text-red-400
+                  bg-white dark:bg-[#1a1713]
+                  hover:bg-red-600
+                  hover:text-white
+                  transition-all duration-300
+                  shadow-md hover:shadow-xl
+                  hover:scale-105
+                  cursor-pointer
+                "
+                    >
+                      <MdDeleteForever className="text-xl" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* <div className="overflow-x-auto rounded-3xl border border-[#8f7848] bg-white shadow-xl">
         <table className="w-full min-w-[700px]">
           <thead>
             <tr className="text-[#8f7848] uppercase tracking-wider border-b">
@@ -316,11 +414,13 @@ const MyListing = () => {
           </thead>
 
           <tbody>
-            {listings.map(item => (
+            {listings.map((item) => (
               <tr key={item._id} className="hover:bg-[#fdf9f0] transition">
                 <td className="px-6 py-4 font-semibold">{item.title}</td>
                 <td className="px-6 py-4 font-medium">{item.roomType}</td>
-                <td className="px-6 py-4 font-bold text-[#8f7848]">$ {item.rent}</td>
+                <td className="px-6 py-4 font-bold text-[#8f7848]">
+                  $ {item.rent}
+                </td>
                 <td className="px-6 py-4 font-medium">{item.location}</td>
                 <td className="px-6 py-4">
                   <div className="flex justify-center gap-3">
@@ -343,200 +443,382 @@ const MyListing = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
 
       {/* UPDATE MODAL */}
       {selectedItem && (
-        <dialog open className="modal modal-bottom sm:modal-middle backdrop-blur-md bg-black/30">
-  <div
-    className="
-      modal-box max-w-3xl
-      bg-[#fdfbf7]
-      rounded-[28px]
-      border border-[#e2d6bf]
-      shadow-[0_28px_80px_rgba(143,120,72,0.25)]
-      p-8
-    "
-  >
-    {/* Header */}
-    <div className="text-center mb-8">
-      <h3 className="text-3xl font-semibold tracking-[0.18em] text-[#161616]">
-        UPDATE LISTING
-      </h3>
-      <div className="mt-3 h-[1px] w-20 mx-auto bg-[#8f7848]" />
-      <p className="text-sm text-gray-500 mt-3">
-        Refine. Adjust. Elevate.
-      </p>
-    </div>
+    //     <dialog
+    //       open
+    //       className="modal modal-bottom sm:modal-middle backdrop-blur-md bg-black/30"
+    //     >
+    //       <div
+    //         className="
+    //   modal-box max-w-3xl
+    //   bg-[#fdfbf7]
+    //   dark:from-[#14120f] dark:to-[#1b1813] dark:border-[#2a241c]
+    //   rounded-[28px]
+    //   border border-[#e2d6bf]
+    //   shadow-[0_28px_80px_rgba(143,120,72,0.25)]
+    //   dark:shadow-[0_35px_90px_rgba(0,0,0,0.7)]
+    //   p-8
+    // "
+    //       >
+    //         {/* Header */}
+    //         <div className="text-center mb-8">
+    //           <h3 className="text-3xl font-semibold tracking-[0.18em] text-[#161616] dark:text-[#e3d8c2]">
+    //             UPDATE LISTING
+    //           </h3>
+    //           <div
+    //             className="mt-3 h-[1px] w-20 mx-auto  bg-gradient-to-r 
+    //                   from-transparent 
+    //                   via-[#8f7848] 
+    //                   to-transparent 
+    //                   dark:via-[#d6c08a]"
+    //           />
+    //           <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
+    //             Refine. Adjust. Elevate.
+    //           </p>
+    //         </div>
 
-    <form
-      onSubmit={handleUpdateRoommate}
-      className="grid grid-cols-1 md:grid-cols-2 gap-5"
-    >
-      {/* Inputs */}
-      <input
-        name="title"
-        defaultValue={selectedItem.title}
-        placeholder="Listing Title"
-        className="w-full px-4 py-3.5 rounded-[18px]
-        bg-white border border-[#ddd2bd]
-        focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
-        text-sm"
-      />
+    //         <form
+    //           onSubmit={handleUpdateRoommate}
+    //           className="grid grid-cols-1 md:grid-cols-2 gap-5"
+    //         >
+    //           {/* Inputs */}
+    //           <input
+    //             name="title"
+    //             defaultValue={selectedItem.title}
+    //             placeholder="Listing Title"
+    //             className="w-full px-4 py-3.5 rounded-[18px]
+    //     bg-white border border-[#ddd2bd]
+    //     focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
+    //     text-sm"
+    //           />
 
-      <input
-        name="location"
-        defaultValue={selectedItem.location}
-        placeholder="Location"
-        className="w-full px-4 py-3.5 rounded-[18px]
-        bg-white border border-[#ddd2bd]
-        focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
-        text-sm"
-      />
+    //           <input
+    //             name="location"
+    //             defaultValue={selectedItem.location}
+    //             placeholder="Location"
+    //             className="w-full px-4 py-3.5 rounded-[18px] 
+    //     bg-white border border-[#ddd2bd]
+    //     focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
+    //     text-sm"
+    //           />
 
-      <input
-        name="rent"
-        type="number"
-        defaultValue={selectedItem.rent}
-        placeholder="Rent Amount"
-        className="w-full px-4 py-3.5 rounded-[18px]
-        bg-white border border-[#ddd2bd]
-        focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
-        text-sm"
-      />
+    //           <input
+    //             name="rent"
+    //             type="number"
+    //             defaultValue={selectedItem.rent}
+    //             placeholder="Rent Amount"
+    //             className="w-full px-4 py-3.5 rounded-[18px]
+    //     bg-white border border-[#ddd2bd]
+    //     focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
+    //     text-sm"
+    //           />
 
-      <select
-        name="roomType"
-        defaultValue={selectedItem.roomType}
-        className="w-full px-4 py-3.5 rounded-[18px]
-        bg-white border border-[#ddd2bd]
-        focus:border-[#8f7848] text-sm"
-      >
-        <option>Single</option>
-        <option>Shared</option>
-      </select>
+    //           <select
+    //             name="roomType"
+    //             defaultValue={selectedItem.roomType}
+    //             className="w-full px-4 py-3.5 rounded-[18px]
+    //     bg-white border border-[#ddd2bd]
+    //     focus:border-[#8f7848] text-sm"
+    //           >
+    //             <option>Single</option>
+    //             <option>Shared</option>
+    //           </select>
 
-      <select
-        name="lifestylePreferences"
-        defaultValue={selectedItem.lifestylePreferences}
-        className="w-full px-4 py-3.5 rounded-[18px]
-        bg-white border border-[#ddd2bd]
-        focus:border-[#8f7848] text-sm"
-      >
-        <option>Pets</option>
-        <option>Smoking</option>
-        <option>Night Owl</option>
-      </select>
+    //           <select
+    //             name="lifestylePreferences"
+    //             defaultValue={selectedItem.lifestylePreferences}
+    //             className="w-full px-4 py-3.5 rounded-[18px]
+    //     bg-white border border-[#ddd2bd]
+    //     focus:border-[#8f7848] text-sm"
+    //           >
+    //             <option>Pets</option>
+    //             <option>Smoking</option>
+    //             <option>Night Owl</option>
+    //           </select>
 
-      <select
-        name="availability"
-        defaultValue={selectedItem.availability}
-        className="w-full px-4 py-3.5 rounded-[18px]
-        bg-white border border-[#ddd2bd]
-        focus:border-[#8f7848] text-sm"
-      >
-        <option>Available</option>
-        <option>Not Available</option>
-      </select>
+    //           <select
+    //             name="availability"
+    //             defaultValue={selectedItem.availability}
+    //             className="w-full px-4 py-3.5 rounded-[18px]
+    //     bg-white border border-[#ddd2bd]
+    //     focus:border-[#8f7848] text-sm"
+    //           >
+    //             <option>Available</option>
+    //             <option>Not Available</option>
+    //           </select>
 
-      <textarea
-        name="description"
-        defaultValue={selectedItem.description}
-        rows={3}
-        placeholder="Short description..."
-        className="md:col-span-2 px-4 py-3.5 rounded-[18px]
-        bg-white border border-[#ddd2bd]
-        focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
-        text-sm"
-      />
+    //           <textarea
+    //             name="description"
+    //             defaultValue={selectedItem.description}
+    //             rows={3}
+    //             placeholder="Short description..."
+    //             className="md:col-span-2 px-4 py-3.5 rounded-[18px]
+    //     bg-white border border-[#ddd2bd]
+    //     focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
+    //     text-sm dark:bg-[#1c1914]
+    //              dark:border-[#2f291f]
+    //              dark:text-[#e6dcc6]
+    //              dark:placeholder:text-[#8f846d]
+    //              dark:focus:border-[#d6c08a]
+    //              dark:focus:ring-[#3a3123]
+    //              transition-all duration-300"
+    //           />
 
-      <input
-        name="contactInfo"
-        defaultValue={selectedItem.contactInfo}
-        placeholder="Contact Information"
-        className="md:col-span-2 px-4 py-3.5 rounded-[18px]
-        bg-white border border-[#ddd2bd]
-        focus:border-[#8f7848] text-sm"
-      />
+    //           <input
+    //             name="contactInfo"
+    //             defaultValue={selectedItem.contactInfo}
+    //             placeholder="Contact Information"
+    //             className="md:col-span-2 px-4 py-3.5 rounded-[18px]
+    //     bg-white border border-[#ddd2bd]
+    //     focus:border-[#8f7848] text-sm dark:bg-[#1c1914]
+    //     dark:border-[#2f291f]
+    //     dark:text-[#e6dcc6]
+    //     dark:placeholder:text-[#8f846d]
+    //     dark:focus:border-[#d6c08a]
+    //     transition-all duration-300
+    //     "
+    //           />
 
-      {/* Actions */}
-      <div className="md:col-span-2 pt-4 flex gap-4">
-        <button
-          type="button"
-          onClick={() => setSelectedItem(null)}
-          className="w-1/2 py-3.5 cursor-pointer rounded-full text-sm tracking-[0.3em]
-          border border-gray-400 text-gray-600
-          hover:bg-gray-100 transition"
+    //           {/* Actions */}
+    //           <div className="md:col-span-2 pt-4 flex gap-4">
+    //             <button
+    //               type="button"
+    //               onClick={() => setSelectedItem(null)}
+    //               className="w-1/2 py-3.5 cursor-pointer rounded-full text-sm tracking-[0.3em]
+    //       border border-gray-400 text-gray-600
+    //       hover:bg-gray-100 transition"
+    //             >
+    //               CANCEL
+    //             </button>
+
+    //             <button
+    //               type="submit"
+    //               className="w-1/2 py-3.5 rounded-full cursor-pointer text-sm font-medium tracking-[0.3em]
+    //       text-[#161616] bg-[#e3d8c2]
+    //       hover:bg-[#d6c8aa]
+    //       hover:shadow-[0_14px_40px_rgba(143,120,72,0.4)]
+    //       transition-all"
+    //             >
+    //               UPDATE
+    //             </button>
+    //           </div>
+    //         </form>
+    //       </div>
+    //     </dialog>
+
+        // best
+                <dialog
+          open
+          className="modal modal-bottom sm:modal-middle backdrop-blur-md bg-black/30"
         >
-          CANCEL
-        </button>
+          <div
+            className="
+              modal-box max-w-3xl
+              bg-[#fdfbf7]
+              dark:bg-gradient-to-br dark:from-[#14120f] dark:via-[#181510] dark:to-[#1f1a14]
+              dark:text-[#e3d8c2]
+              dark:border-[#2a241c]
+              rounded-[28px]
+              border border-[#e2d6bf]
+              shadow-[0_28px_80px_rgba(143,120,72,0.25)]
+              dark:shadow-[0_35px_90px_rgba(0,0,0,0.7)]
+              p-8 
+            "
+          >
+            {/* Header */}
+            <div className="text-center mb-8">
+              <h3 className="text-3xl font-semibold tracking-[0.18em] text-[#161616] dark:text-[#ffffff] dark:drop-shadow-[0_0_12px_rgba(214,192,138,0.3)]">
+                UPDATE LISTING
+              </h3>
+              <div
+                className="mt-3 h-[1px] w-20 mx-auto bg-gradient-to-r
+                      from-transparent
+                      via-[#8f7848]
+                      to-transparent
+                      dark:via-[#d6c08a]"
+              />
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
+                Refine. Adjust. Elevate.
+              </p>
+            </div>
 
-        <button
-          type="submit"
-          className="w-1/2 py-3.5 rounded-full cursor-pointer text-sm font-medium tracking-[0.3em]
-          text-[#161616] bg-[#e3d8c2]
-          hover:bg-[#d6c8aa]
-          hover:shadow-[0_14px_40px_rgba(143,120,72,0.4)]
-          transition-all"
-        >
-          UPDATE
-        </button>
-      </div>
-    </form>
-  </div>
-</dialog>
+            <form
+              onSubmit={handleUpdateRoommate}
+              className="grid grid-cols-1 md:grid-cols-2 gap-5"
+            >
+              {/* Inputs */}
+              <input
+                name="title"
+                defaultValue={selectedItem.title}
+                placeholder="Listing Title"
+                className="w-full px-4 py-3.5 rounded-[18px]
+                bg-white border border-[#ddd2bd]
+                focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
+                text-sm
+                dark:bg-[#1c1914]
+                dark:border-[#2f291f]
+                dark:text-[#ffffff]
+                dark:placeholder:text-gray-400
+                dark:focus:border-[#d6c08a]
+                dark:focus:ring-[#3a3123]
+                transition-all duration-300"
+              />
 
-        // <dialog open className="modal modal-bottom sm:modal-middle">
-        //   <div className="modal-box max-w-3xl">
-        //     <h3 className="text-3xl font-bold text-center mb-6 text-[#8f7848]">
-        //       Update Listing
-        //     </h3>
+              <input
+                name="location"
+                defaultValue={selectedItem.location}
+                placeholder="Location"
+                className="w-full px-4 py-3.5 rounded-[18px]
+                bg-white border border-[#ddd2bd]
+                focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
+                text-sm
+                dark:bg-[#1c1914]
+                dark:border-[#2f291f]
+                dark:text-[#ffffff]
+                dark:placeholder:text-gray-400
+                dark:focus:border-[#d6c08a]
+                dark:focus:ring-[#3a3123]
+                transition-all duration-300"
+              />
 
-        //     <form onSubmit={handleUpdateRoommate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        //       <input name="title" defaultValue={selectedItem.title} className="input input-bordered w-full" />
-        //       <input name="location" defaultValue={selectedItem.location} className="input input-bordered w-full" />
-        //       <input name="rent" type="number" defaultValue={selectedItem.rent} className="input input-bordered w-full" />
+              <input
+                name="rent"
+                type="number"
+                defaultValue={selectedItem.rent}
+                placeholder="Rent Amount"
+                className="w-full px-4 py-3.5 rounded-[18px]
+                bg-white border border-[#ddd2bd]
+                focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
+                text-sm
+                dark:bg-[#1c1914]
+                dark:border-[#2f291f]
+                dark:text-[#ffffff]
+                dark:placeholder:text-gray-400
+                dark:focus:border-[#d6c08a]
+                dark:focus:ring-[#3a3123]
+                transition-all duration-300"
+              />
 
-        //       <select name="roomType" defaultValue={selectedItem.roomType} className="select select-bordered w-full">
-        //         <option>Single</option>
-        //         <option>Shared</option>
-        //       </select>
+              <select
+                name="roomType"
+                defaultValue={selectedItem.roomType}
+                className="w-full px-4 py-3.5 rounded-[18px]
+                bg-white border border-[#ddd2bd]
+                focus:border-[#8f7848] text-sm
+                dark:bg-[#1c1914]
+                dark:border-[#2f291f]
+                dark:text-[#ffffff]
+                dark:focus:border-[#d6c08a]
+                transition-all duration-300"
+              >
+                <option>Single</option>
+                <option>Shared</option>
+              </select>
 
-        //       <select name="lifestylePreferences" defaultValue={selectedItem.lifestylePreferences} className="select select-bordered w-full">
-        //         <option>Pets</option>
-        //         <option>Smoking</option>
-        //         <option>Night Owl</option>
-        //       </select>
+              <select
+                name="lifestylePreferences"
+                defaultValue={selectedItem.lifestylePreferences}
+                className="w-full px-4 py-3.5 rounded-[18px]
+                bg-white border border-[#ddd2bd]
+                focus:border-[#8f7848] text-sm
+                dark:bg-[#1c1914]
+                dark:border-[#2f291f]
+                dark:text-[#ffffff]
+                dark:focus:border-[#d6c08a]
+                transition-all duration-300"
+              >
+                <option>Pets</option>
+                <option>Smoking</option>
+                <option>Night Owl</option>
+              </select>
 
-        //       <select name="availability" defaultValue={selectedItem.availability} className="select select-bordered w-full">
-        //         <option>Available</option>
-        //         <option>Not Available</option>
-        //       </select>
+              <select
+                name="availability"
+                defaultValue={selectedItem.availability}
+                className="w-full px-4 py-3.5 rounded-[18px]
+                bg-white border border-[#ddd2bd]
+                focus:border-[#8f7848] text-sm
+                dark:bg-[#1c1914]
+                dark:border-[#2f291f]
+                dark:text-[#ffffff]
+                dark:focus:border-[#d6c08a]
+                transition-all duration-300"
+              >
+                <option>Available</option>
+                <option>Not Available</option>
+              </select>
 
-        //       <textarea
-        //         name="description"
-        //         defaultValue={selectedItem.description}
-        //         className="textarea textarea-bordered col-span-full"
-        //         rows={4}
-        //       />
+              <textarea
+                name="description"
+                defaultValue={selectedItem.description}
+                rows={3}
+                placeholder="Short description..."
+                className="md:col-span-2 px-4 py-3.5 rounded-[18px]
+                bg-white border border-[#ddd2bd]
+                focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
+                text-sm
+                dark:bg-[#1c1914]
+                dark:border-[#2f291f]
+                dark:text-[#ffffff]
+                dark:placeholder:text-gray-400
+                dark:focus:border-[#d6c08a]
+                dark:focus:ring-[#3a3123]
+                transition-all duration-300"
+              />
 
-        //       <input
-        //         name="contactInfo"
-        //         defaultValue={selectedItem.contactInfo}
-        //         className="input input-bordered col-span-full"
-        //       />
+              <input
+                name="contactInfo"
+                defaultValue={selectedItem.contactInfo}
+                placeholder="Contact Information"
+                className="md:col-span-2 px-4 py-3.5 rounded-[18px]
+                bg-white border border-[#ddd2bd]
+                focus:border-[#8f7848] text-sm
+                dark:bg-[#1c1914]
+                dark:border-[#2f291f]
+                dark:text-[#ffffff]
+                dark:placeholder:text-gray-400
+                dark:focus:border-[#d6c08a]
+                transition-all duration-300"
+              />
 
-        //       <div className="modal-action col-span-full">
-        //         <button className="btn btn-outline" type="button" onClick={() => setSelectedItem(null)}>
-        //           Cancel
-        //         </button>
-        //         <button className="btn bg-[#8f7848] text-black">
-        //           Update
-        //         </button>
-        //       </div>
-        //     </form>
-        //   </div>
-        // </dialog>
+              {/* Actions */}
+              <div className="md:col-span-2 pt-4 flex gap-4">
+                <button
+                  type="button"
+                  onClick={() => setSelectedItem(null)}
+                  className="w-1/2 py-3.5 cursor-pointer rounded-full text-sm tracking-[0.3em]
+                  border border-gray-400 text-gray-600
+                  hover:bg-gray-100 transition
+                  dark:border-[#3a3328]
+                  dark:text-[#b7ad98]
+                  dark:hover:bg-[#1f1b15]
+                  dark:hover:text-[#e6dcc6]
+                  transition-all duration-300"
+                >
+                  CANCEL
+                </button>
+
+                <button
+                  type="submit"
+                  className="w-1/2 py-3.5 rounded-full cursor-pointer text-sm font-medium tracking-[0.3em]
+                  text-[#161616] bg-[#e3d8c2]
+                  hover:bg-[#d6c8aa]
+                  hover:shadow-[0_14px_40px_rgba(143,120,72,0.4)]
+                  transition-all
+                  
+                  dark:hover:shadow-[0_20px_60px_rgba(214,192,138,0.45)]
+                  dark:hover:scale-[1.02]
+                  duration-300"
+                >
+                  UPDATE
+                </button>
+              </div>
+            </form>
+          </div>
+        </dialog>
       )}
     </div>
   );

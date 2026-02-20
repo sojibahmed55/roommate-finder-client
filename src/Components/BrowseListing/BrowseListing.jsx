@@ -264,7 +264,7 @@ const BrowseListing = () => {
                     to={`/roommate-details/${roommate._id}`}
                     className="
                       inline-flex items-center justify-center
-                      px-6 py-2 rounded-full text-sm font-medium
+                      px-6 py-2 rounded-sm text-sm font-medium
                       border border-[#c9b27c]
                       text-[#8f7848]
                       dark:text-[#d6c08a]
@@ -331,7 +331,7 @@ const BrowseListing = () => {
               <Link
                 to={`/roommate-details/${roommate._id}`}
                 className="
-                  px-4 py-1.5 rounded-full text-xs
+                  px-4 py-1.5 rounded-xs text-xs
                   border border-[#c9b27c]
                   text-[#8f7848]
                   dark:text-[#d6c08a]
