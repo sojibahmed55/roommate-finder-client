@@ -29,7 +29,7 @@ const SocialLogin = () => {
     py-3.5
     rounded-2xl
     border border-[#e6dcc2]
-    text-[#1b1b1b]
+    text-[#1b1b1b] dark:text-white
     font-medium text-sm
     
   "

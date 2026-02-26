@@ -230,15 +230,35 @@ const MyListing = () => {
   const { user, loading } = useContext(AuthContext);
   const [listings, setListings] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [dataLoading, setDataLoading] = useState(true);
+  
 
   // Fetch user's listings
   useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:5000/roommate-by-email?email=${user.email}`)
-        .then((res) => res.json())
-        .then((data) => setListings(data));
-    }
-  }, [user]);
+  if (user?.email) {
+    setDataLoading(true);
+
+    fetch(`http://localhost:5000/roommate-by-email?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setListings(data);
+        setDataLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setDataLoading(false);
+      });
+  }
+}, [user]);
+
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`http://localhost:5000/roommate-by-email?email=${user.email}`)
+  //       .then((res) => res.json())
+  //       .then((data) => setListings(data));
+  //   }
+  // }, [user]);
 
   // DELETE
   const handleDelete = (id) => {
@@ -293,7 +313,10 @@ const MyListing = () => {
       });
   };
 
-  if (loading) return <Spinner />;
+  if (loading || dataLoading) {
+  return <Spinner />;
+}
+
 
   return (
     <div className="max-w-6xl mx-auto my-12 px-4">
@@ -401,215 +424,9 @@ const MyListing = () => {
         </table>
       </div>
 
-      {/* <div className="overflow-x-auto rounded-3xl border border-[#8f7848] bg-white shadow-xl">
-        <table className="w-full min-w-[700px]">
-          <thead>
-            <tr className="text-[#8f7848] uppercase tracking-wider border-b">
-              <th className="py-4 px-6 text-left">Title</th>
-              <th className="py-4 px-6">Room</th>
-              <th className="py-4 px-6">Rent</th>
-              <th className="py-4 px-6">Location</th>
-              <th className="py-4 px-6 text-center">Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {listings.map((item) => (
-              <tr key={item._id} className="hover:bg-[#fdf9f0] transition">
-                <td className="px-6 py-4 font-semibold">{item.title}</td>
-                <td className="px-6 py-4 font-medium">{item.roomType}</td>
-                <td className="px-6 py-4 font-bold text-[#8f7848]">
-                  $ {item.rent}
-                </td>
-                <td className="px-6 py-4 font-medium">{item.location}</td>
-                <td className="px-6 py-4">
-                  <div className="flex justify-center gap-3">
-                    <button
-                      onClick={() => setSelectedItem(item)}
-                      className="w-10 h-10 grid place-items-center rounded-xl border border-[#8f7848] text-[#8f7848] hover:bg-[#8f7848] hover:text-black transition"
-                    >
-                      <FaEdit className="text-xl" />
-                    </button>
-
-                    <button
-                      onClick={() => handleDelete(item._id)}
-                      className="w-10 h-10 grid place-items-center rounded-xl border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition"
-                    >
-                      <MdDeleteForever className="text-xl" />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> */}
-
       {/* UPDATE MODAL */}
       {selectedItem && (
-    //     <dialog
-    //       open
-    //       className="modal modal-bottom sm:modal-middle backdrop-blur-md bg-black/30"
-    //     >
-    //       <div
-    //         className="
-    //   modal-box max-w-3xl
-    //   bg-[#fdfbf7]
-    //   dark:from-[#14120f] dark:to-[#1b1813] dark:border-[#2a241c]
-    //   rounded-[28px]
-    //   border border-[#e2d6bf]
-    //   shadow-[0_28px_80px_rgba(143,120,72,0.25)]
-    //   dark:shadow-[0_35px_90px_rgba(0,0,0,0.7)]
-    //   p-8
-    // "
-    //       >
-    //         {/* Header */}
-    //         <div className="text-center mb-8">
-    //           <h3 className="text-3xl font-semibold tracking-[0.18em] text-[#161616] dark:text-[#e3d8c2]">
-    //             UPDATE LISTING
-    //           </h3>
-    //           <div
-    //             className="mt-3 h-[1px] w-20 mx-auto  bg-gradient-to-r 
-    //                   from-transparent 
-    //                   via-[#8f7848] 
-    //                   to-transparent 
-    //                   dark:via-[#d6c08a]"
-    //           />
-    //           <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
-    //             Refine. Adjust. Elevate.
-    //           </p>
-    //         </div>
 
-    //         <form
-    //           onSubmit={handleUpdateRoommate}
-    //           className="grid grid-cols-1 md:grid-cols-2 gap-5"
-    //         >
-    //           {/* Inputs */}
-    //           <input
-    //             name="title"
-    //             defaultValue={selectedItem.title}
-    //             placeholder="Listing Title"
-    //             className="w-full px-4 py-3.5 rounded-[18px]
-    //     bg-white border border-[#ddd2bd]
-    //     focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
-    //     text-sm"
-    //           />
-
-    //           <input
-    //             name="location"
-    //             defaultValue={selectedItem.location}
-    //             placeholder="Location"
-    //             className="w-full px-4 py-3.5 rounded-[18px] 
-    //     bg-white border border-[#ddd2bd]
-    //     focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
-    //     text-sm"
-    //           />
-
-    //           <input
-    //             name="rent"
-    //             type="number"
-    //             defaultValue={selectedItem.rent}
-    //             placeholder="Rent Amount"
-    //             className="w-full px-4 py-3.5 rounded-[18px]
-    //     bg-white border border-[#ddd2bd]
-    //     focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
-    //     text-sm"
-    //           />
-
-    //           <select
-    //             name="roomType"
-    //             defaultValue={selectedItem.roomType}
-    //             className="w-full px-4 py-3.5 rounded-[18px]
-    //     bg-white border border-[#ddd2bd]
-    //     focus:border-[#8f7848] text-sm"
-    //           >
-    //             <option>Single</option>
-    //             <option>Shared</option>
-    //           </select>
-
-    //           <select
-    //             name="lifestylePreferences"
-    //             defaultValue={selectedItem.lifestylePreferences}
-    //             className="w-full px-4 py-3.5 rounded-[18px]
-    //     bg-white border border-[#ddd2bd]
-    //     focus:border-[#8f7848] text-sm"
-    //           >
-    //             <option>Pets</option>
-    //             <option>Smoking</option>
-    //             <option>Night Owl</option>
-    //           </select>
-
-    //           <select
-    //             name="availability"
-    //             defaultValue={selectedItem.availability}
-    //             className="w-full px-4 py-3.5 rounded-[18px]
-    //     bg-white border border-[#ddd2bd]
-    //     focus:border-[#8f7848] text-sm"
-    //           >
-    //             <option>Available</option>
-    //             <option>Not Available</option>
-    //           </select>
-
-    //           <textarea
-    //             name="description"
-    //             defaultValue={selectedItem.description}
-    //             rows={3}
-    //             placeholder="Short description..."
-    //             className="md:col-span-2 px-4 py-3.5 rounded-[18px]
-    //     bg-white border border-[#ddd2bd]
-    //     focus:border-[#8f7848] focus:ring-1 focus:ring-[#e9dec8]
-    //     text-sm dark:bg-[#1c1914]
-    //              dark:border-[#2f291f]
-    //              dark:text-[#e6dcc6]
-    //              dark:placeholder:text-[#8f846d]
-    //              dark:focus:border-[#d6c08a]
-    //              dark:focus:ring-[#3a3123]
-    //              transition-all duration-300"
-    //           />
-
-    //           <input
-    //             name="contactInfo"
-    //             defaultValue={selectedItem.contactInfo}
-    //             placeholder="Contact Information"
-    //             className="md:col-span-2 px-4 py-3.5 rounded-[18px]
-    //     bg-white border border-[#ddd2bd]
-    //     focus:border-[#8f7848] text-sm dark:bg-[#1c1914]
-    //     dark:border-[#2f291f]
-    //     dark:text-[#e6dcc6]
-    //     dark:placeholder:text-[#8f846d]
-    //     dark:focus:border-[#d6c08a]
-    //     transition-all duration-300
-    //     "
-    //           />
-
-    //           {/* Actions */}
-    //           <div className="md:col-span-2 pt-4 flex gap-4">
-    //             <button
-    //               type="button"
-    //               onClick={() => setSelectedItem(null)}
-    //               className="w-1/2 py-3.5 cursor-pointer rounded-full text-sm tracking-[0.3em]
-    //       border border-gray-400 text-gray-600
-    //       hover:bg-gray-100 transition"
-    //             >
-    //               CANCEL
-    //             </button>
-
-    //             <button
-    //               type="submit"
-    //               className="w-1/2 py-3.5 rounded-full cursor-pointer text-sm font-medium tracking-[0.3em]
-    //       text-[#161616] bg-[#e3d8c2]
-    //       hover:bg-[#d6c8aa]
-    //       hover:shadow-[0_14px_40px_rgba(143,120,72,0.4)]
-    //       transition-all"
-    //             >
-    //               UPDATE
-    //             </button>
-    //           </div>
-    //         </form>
-    //       </div>
-    //     </dialog>
-
-        // best
                 <dialog
           open
           className="modal modal-bottom sm:modal-middle backdrop-blur-md bg-black/30"
@@ -630,8 +447,8 @@ const MyListing = () => {
           >
             {/* Header */}
             <div className="text-center mb-8">
-              <h3 className="text-3xl font-semibold tracking-[0.18em] text-[#161616] dark:text-[#ffffff] dark:drop-shadow-[0_0_12px_rgba(214,192,138,0.3)]">
-                UPDATE LISTING
+              <h3 className="text-3xl font-semibold text-[#161616] dark:text-[#ffffff] dark:drop-shadow-[0_0_12px_rgba(214,192,138,0.3)]">
+                Update Your Post
               </h3>
               <div
                 className="mt-3 h-[1px] w-20 mx-auto bg-gradient-to-r
@@ -791,7 +608,7 @@ const MyListing = () => {
                   onClick={() => setSelectedItem(null)}
                   className="w-1/2 py-3.5 cursor-pointer rounded-full text-sm tracking-[0.3em]
                   border border-gray-400 text-gray-600
-                  hover:bg-gray-100 transition
+                  hover:bg-gray-100 
                   dark:border-[#3a3328]
                   dark:text-[#b7ad98]
                   dark:hover:bg-[#1f1b15]

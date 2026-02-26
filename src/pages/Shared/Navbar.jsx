@@ -815,7 +815,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Add Listing", path: "/add-listing" },
+    { name: "Find Roommate", path: "/add-listing" },
     { name: "Browse Listing", path: "/browse-listing" },
     { name: "My Listing", path: "/my-listing" },
   ];
@@ -919,22 +919,22 @@ transition-colors duration-300"
             <div className="hidden md:block">
               {user ? (
                 <div className="relative group">
-                  <button className="flex items-center gap-2 p-1 pl-1 pr-3 rounded-full bg-gray-100 dark:bg-gray-800 border border-transparent hover:border-blue-500/50 transition-all">
+                  <button className="flex items-center gap-2 p-1 pl-1  rounded-full bg-gray-100 dark:bg-gray-800 border border-transparent hover:border-blue-500/50 transition-all">
                     <img
                       src={user.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"}
                       className="w-8 h-8 rounded-full object-cover"
                       alt="avatar"
                     />
-                    <span className="text-sm font-bold dark:text-gray-200">
+                    {/* <span className="text-sm font-bold dark:text-gray-200">
                       {user.displayName?.split(" ")[0]}
-                    </span>
+                    </span> */}
                   </button>
 
                   {/* Dropdown Menu */}
                   <div className="absolute right-0 mt-3 w-56 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-200 z-[110]">
                     <div className="px-4 py-3 border-b dark:border-gray-800">
-                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                        Signed in as
+                      <p className="text-[16px] font-bold dark:text-white text-black ">
+                        {user.displayName}
                       </p>
                       <p className="text-sm font-bold truncate dark:text-white">
                         {user.email}

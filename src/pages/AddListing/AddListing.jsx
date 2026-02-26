@@ -27,110 +27,6 @@ const AddListing = () => {
   };
 
   return (
-    // <div className="max-w-3xl mx-auto p-6 mt-10 bg-white rounded-xl shadow-lg">
-    //   <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-    //     Add  Listing
-    //   </h2>
-    //   <form onSubmit={handleSubmit} className="space-y-4">
-    //     <input
-    //       name="title"
-    //       type="text"
-    //       placeholder="Title"
-    //       className="input input-bordered w-full"
-    //       required
-    //     />
-    //     <input
-    //       name="location"
-    //       type="text"
-    //       placeholder="Location"
-    //       className="input input-bordered w-full"
-    //       required
-    //     />
-    //     <input
-    //       name="rent"
-    //       type="number"
-    //       placeholder="Rent Amount"
-    //       className="input input-bordered w-full"
-    //       required
-    //     />
-    //     <input
-    //       name="photoUrl"
-    //       type="text"
-    //       placeholder="Photo URL"
-    //       className="input input-bordered w-full"
-    //       required
-    //     />
-    //     <select
-    //       name="roomType"
-    //       className="select select-bordered w-full"
-    //       required
-    //     >
-    //       <option disabled value="">
-    //         Room Type
-    //       </option>
-    //       <option value="Single">Single</option>
-    //       <option value="Shared">Shared</option>
-    //     </select>
-    //     <select
-    //       name="lifestylePreferences"
-    //       className="select select-bordered w-full"
-    //       required
-    //     >
-    //       <option disabled value="">
-    //         Lifestyle Preferences
-    //       </option>
-    //       <option value="Pets">Pets</option>
-    //       <option value="Smoking">Smoking</option>
-    //       <option value="Night Owl">Night Owl</option>
-    //     </select>
-    //     <textarea
-    //       name="description"
-    //       placeholder="Description"
-    //       className="textarea textarea-bordered w-full"
-    //       rows={5}
-    //       required
-    //     />
-    //     <input
-    //       name="contactInfo"
-    //       type="text"
-    //       placeholder="Contact Info"
-    //       className="input input-bordered w-full"
-    //       required
-    //     />
-    //     <select
-    //       name="availability"
-    //       className="select select-bordered w-full"
-    //       required
-    //     >
-    //       <option disabled value="">
-    //         Availability
-    //       </option>
-    //       <option value="Available">Available</option>
-    //       <option value="Not Available">Not Available</option>
-    //     </select>
-    //     <input
-    //       name="userEmail"
-    //       type="email"
-    //       defaultValue={user?.email}
-    //       readOnly
-    //       className="input input-bordered w-full bg-gray-100 text-gray-600"
-    //     />
-    //     <input
-    //       name="userName"
-    //       type="text"
-    //       defaultValue={user?.displayName}
-    //       readOnly
-    //       className="input input-bordered w-full bg-gray-100 text-gray-600"
-    //     />
-    //     <button
-    //       type="submit"
-    //       className="btn btn-primary w-full uppercase tracking-wide"
-    //     >
-    //       Add
-    //     </button>
-    //   </form>
-    // </div>
-
     <div className="min-h-screen flex items-center justify-center  px-4 dark:bg-gradient-to-br dark:from-[#0f0e0c] dark:via-[#14120f] dark:to-[#1a1712] transition-colors duration-500 pb-8 pt-8">
       <div
         className="w-full max-w-3xl dark:bg-gradient-to-br dark:from-[#1a1611] dark:via-[#1f1a14] dark:to-[#262017]
@@ -138,16 +34,13 @@ dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
  bg-[#fdfbf7] rounded-[28px] shadow-[0_28px_80px_rgba(143,120,72,0.25)] border border-[#e2d6bf] p-8"
       >
         {/* Header */}
-        <div className="text-center mb-8">
-          <h2
-            className="text-3xl font-semibold tracking-[0.18em] text-[#161616] dark:text-[#ffffff] 
-        dark:drop-shadow-[0_0_14px_rgba(214,192,138,0.35)]"
-          >
-            ADD LISTING
+        <div className="text-center mb-6 sm:mb-8 px-4 sm:px-0">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#161616] dark:text-[#ffffff] leading-snug sm:leading-normal dark:drop-shadow-[0_0_14px_rgba(214,192,138,0.35)]">
+            Add to Find Roommate
           </h2>
           <div className="mt-3 h-[1px] w-20 mx-auto bg-[#8f7848] dark:bg-gradient-to-r dark:from-transparent dark:via-[#d6c08a] dark:to-transparent" />
-          <p className="text-sm text-gray-500 mt-3 dark:text-[#ffffff]">
-            Understated. Premium. Intentional.
+          <p className="text-xs sm:text-sm md:text-base text-gray-500 mt-3 sm:mt-4 max-w-xs sm:max-w-md md:max-w-lg mx-auto dark:text-[#eaeaea] leading-relaxed">
+            Match smart. Live better. Find your perfect roommate.
           </p>
         </div>
 

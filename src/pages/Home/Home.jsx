@@ -1,39 +1,83 @@
-import React, { Suspense } from 'react';
+// import React, { Suspense } from 'react';
+// import Roommate from './Roommate';
+// import Spinner from '../../Components/Spinner/Spinner';
+// import RoommateSection from '../Shared/RoommateSection';
+// import HowRoommateWorks from '../Shared/HowRoommateWorks';
+// import LifestyleMatch from '../Shared/LifestyleMatch';
+// import Slider from '../Shared/Slider';
+// // import { useLoaderData } from 'react-router';
+// // import RommateCard from '../../Components/RoommateCard/RommateCard';
+
+// const Home = () => {
+
+//     // const rommateData = useLoaderData();
+//     // console.log(rommateData);
+//     const roommatePromise = fetch("http://localhost:5000/featured-roommates").then(res => res.json());
+
+//     return (
+//         <div>
+//             <Slider></Slider>
+
+//             {/* <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+//                 {
+//                     rommateData.map(roommate => <RommateCard key={roommate._id} roommate={roommate}></RommateCard>)
+//                 }
+//             </div> */}
+//             <Suspense fallback={<Spinner></Spinner>}>
+//                 <Roommate roommatePromise={roommatePromise}></Roommate>
+//             </Suspense>
+
+//             <div>
+//                 <RoommateSection></RoommateSection>
+//                 <HowRoommateWorks></HowRoommateWorks>
+//                 <LifestyleMatch></LifestyleMatch>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default Home;
+
+import React, { Suspense, useEffect, useState } from 'react';
 import Roommate from './Roommate';
 import Spinner from '../../Components/Spinner/Spinner';
 import RoommateSection from '../Shared/RoommateSection';
 import HowRoommateWorks from '../Shared/HowRoommateWorks';
 import LifestyleMatch from '../Shared/LifestyleMatch';
 import Slider from '../Shared/Slider';
-// import { useLoaderData } from 'react-router';
-// import RommateCard from '../../Components/RoommateCard/RommateCard';
+
 
 const Home = () => {
 
-    // const rommateData = useLoaderData();
-    // console.log(rommateData);
-    const roommatePromise = fetch("http://localhost:5000/featured-roommates").then(res => res.json());
+  const [roommates, setRoommates] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    return (
-        <div>
-            <Slider></Slider>
+  useEffect(() => {
+    fetch("http://localhost:5000/featured-roommates")
+      .then(res => res.json())
+      .then(data => {
+        setRoommates(data);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, []);
 
-            {/* <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-                {
-                    rommateData.map(roommate => <RommateCard key={roommate._id} roommate={roommate}></RommateCard>)
-                }
-            </div> */}
-            <Suspense fallback={<Spinner></Spinner>}>
-                <Roommate roommatePromise={roommatePromise}></Roommate>
-            </Suspense>
+  if (loading) {
+    return <Spinner />;
+  }
 
-            <div>
-                <RoommateSection></RoommateSection>
-                <HowRoommateWorks></HowRoommateWorks>
-                <LifestyleMatch></LifestyleMatch>
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <Slider />
+      <Roommate roommates={roommates} />
+      <RoommateSection />
+      <HowRoommateWorks />
+      <LifestyleMatch />
+    </div>
+  );
 };
 
 export default Home;

@@ -17,28 +17,7 @@ const ThemeToggle = () => {
         <Sun size={18} className="text-yellow-500 " />
       )}
     </button>
-    // <button
-    //   onClick={toggleTheme}
-    //   className="relative w-16 h-8 rounded-full
-    //   bg-white/40 dark:bg-black/40
-    //   backdrop-blur-xl
-    //   border border-gray-300 dark:border-gray-700
-    //   transition-all duration-500 shadow-inner"
-    // >
-    //   <div
-    //     className={`absolute top-1 left-1 w-6 h-6
-    //     rounded-full bg-white dark:bg-slate-900
-    //     flex items-center justify-center
-    //     shadow-lg transform transition-all duration-500
-    //     ${theme === "dark" ? "translate-x-8" : ""}`}
-    //   >
-    //     {theme === "dark" ? (
-    //       <Moon size={16} className="text-yellow-400" />
-    //     ) : (
-    //       <Sun size={16} className="text-orange-500" />
-    //     )}
-    //   </div>
-    // </button>
+    
   );
 };
 

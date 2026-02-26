@@ -75,7 +75,7 @@ const Details = () => {
   }, [loaderData]);
 
   if (!roommate) {
-    // যতক্ষণ data load হচ্ছে spinner দেখাবে
+  // যতক্ষণ data load হচ্ছে spinner দেখাবে
     return <Spinner />;
   }
 
