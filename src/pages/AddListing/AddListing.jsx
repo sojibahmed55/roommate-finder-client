@@ -24,6 +24,8 @@ const AddListing = () => {
           alert("added suceess");
         }
       });
+      
+      
   };
 
   return (
@@ -82,6 +84,23 @@ dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
           <select
             name="roomType"
             required
+            defaultValue=""
+            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+          dark:text-[#ffffff]
+          dark:focus:border-[#d6c08a]
+          transition-all duration-300"
+          >
+            <option value="" disabled>
+              Room Type
+            </option>
+
+            <option value="Single">Single</option>
+            <option value="Shared">Shared</option>
+          </select>
+
+          {/* <select
+            name="roomType"
+            required
             className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
           dark:text-[#ffffff]
           dark:focus:border-[#d6c08a]
@@ -92,9 +111,27 @@ dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
             </option>
             <option>Single</option>
             <option>Shared</option>
-          </select>
+          </select> */}
 
           <select
+            name="lifestylePreferences"
+            required
+            defaultValue=""
+            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+  dark:text-[#ffffff]
+  dark:focus:border-[#d6c08a]
+  transition-all duration-300"
+          >
+            <option value="" disabled>
+              Lifestyle Preference
+            </option>
+
+            <option value="Pets">Pets</option>
+            <option value="Smoking">Smoking</option>
+            <option value="Night Owl">Night Owl</option>
+          </select>
+
+          {/* <select
             name="lifestylePreferences"
             required
             className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
@@ -108,7 +145,7 @@ dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
             <option>Pets</option>
             <option>Smoking</option>
             <option>Night Owl</option>
-          </select>
+          </select> */}
 
           {/* Textarea */}
           <textarea
@@ -144,6 +181,23 @@ dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
           <select
             name="availability"
             required
+            defaultValue=""
+            className="md:col-span-2 px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+          dark:text-[#ffffff]
+          dark:focus:border-[#d6c08a]
+          transition-all duration-300"
+          >
+            <option value="" disabled>
+              Availability
+            </option>
+
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+          </select>
+
+          {/* <select
+            name="availability"
+            required
             className="md:col-span-2 px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
           dark:text-[#ffffff]
           dark:focus:border-[#d6c08a]
@@ -154,7 +208,7 @@ dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
             </option>
             <option>Available</option>
             <option>Not Available</option>
-          </select>
+          </select> */}
 
           {/* Read only */}
           <input

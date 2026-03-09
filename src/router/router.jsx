@@ -48,6 +48,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/browse-listing',
+                // loader: () => fetch("http://localhost:5000/roommate"),
                 element: <BrowseListing></BrowseListing>
             }
         ]

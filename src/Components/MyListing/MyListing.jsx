@@ -231,26 +231,24 @@ const MyListing = () => {
   const [listings, setListings] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
-  
 
   // Fetch user's listings
   useEffect(() => {
-  if (user?.email) {
-    setDataLoading(true);
+    if (user?.email) {
+      setDataLoading(true);
 
-    fetch(`http://localhost:5000/roommate-by-email?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setListings(data);
-        setDataLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setDataLoading(false);
-      });
-  }
-}, [user]);
-
+      fetch(`http://localhost:5000/roommate-by-email?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setListings(data);
+          setDataLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setDataLoading(false);
+        });
+    }
+  }, [user]);
 
   // useEffect(() => {
   //   if (user?.email) {
@@ -314,9 +312,8 @@ const MyListing = () => {
   };
 
   if (loading || dataLoading) {
-  return <Spinner />;
-}
-
+    return <Spinner />;
+  }
 
   return (
     <div className="max-w-6xl mx-auto my-12 px-4">
@@ -426,8 +423,7 @@ const MyListing = () => {
 
       {/* UPDATE MODAL */}
       {selectedItem && (
-
-                <dialog
+        <dialog
           open
           className="modal modal-bottom sm:modal-middle backdrop-blur-md bg-black/30"
         >
@@ -518,54 +514,53 @@ const MyListing = () => {
                 dark:focus:ring-[#3a3123]
                 transition-all duration-300"
               />
-
               <select
                 name="roomType"
                 defaultValue={selectedItem.roomType}
                 className="w-full px-4 py-3.5 rounded-[18px]
-                bg-white border border-[#ddd2bd]
-                focus:border-[#8f7848] text-sm
-                dark:bg-[#1c1914]
-                dark:border-[#2f291f]
-                dark:text-[#ffffff]
-                dark:focus:border-[#d6c08a]
-                transition-all duration-300"
+  bg-white border border-[#ddd2bd]
+  focus:border-[#8f7848] text-sm
+  dark:bg-[#1c1914]
+  dark:border-[#2f291f]
+  dark:text-[#ffffff]
+  dark:focus:border-[#d6c08a]
+  transition-all duration-300"
               >
-                <option>Single</option>
-                <option>Shared</option>
+                <option value="Single">Single</option>
+                <option value="Shared">Shared</option>
               </select>
 
               <select
                 name="lifestylePreferences"
                 defaultValue={selectedItem.lifestylePreferences}
                 className="w-full px-4 py-3.5 rounded-[18px]
-                bg-white border border-[#ddd2bd]
-                focus:border-[#8f7848] text-sm
-                dark:bg-[#1c1914]
-                dark:border-[#2f291f]
-                dark:text-[#ffffff]
-                dark:focus:border-[#d6c08a]
-                transition-all duration-300"
+  bg-white border border-[#ddd2bd]
+  focus:border-[#8f7848] text-sm
+  dark:bg-[#1c1914]
+  dark:border-[#2f291f]
+  dark:text-[#ffffff]
+  dark:focus:border-[#d6c08a]
+  transition-all duration-300"
               >
-                <option>Pets</option>
-                <option>Smoking</option>
-                <option>Night Owl</option>
+                <option value="Pets">Pets</option>
+                <option value="Smoking">Smoking</option>
+                <option value="Night Owl">Night Owl</option>
               </select>
 
               <select
                 name="availability"
                 defaultValue={selectedItem.availability}
                 className="w-full px-4 py-3.5 rounded-[18px]
-                bg-white border border-[#ddd2bd]
-                focus:border-[#8f7848] text-sm
-                dark:bg-[#1c1914]
-                dark:border-[#2f291f]
-                dark:text-[#ffffff]
-                dark:focus:border-[#d6c08a]
-                transition-all duration-300"
+  bg-white border border-[#ddd2bd]
+  focus:border-[#8f7848] text-sm
+  dark:bg-[#1c1914]
+  dark:border-[#2f291f]
+  dark:text-[#ffffff]
+  dark:focus:border-[#d6c08a]
+  transition-all duration-300"
               >
-                <option>Available</option>
-                <option>Not Available</option>
+                <option value="Available">Available</option>
+                <option value="Not Available">Not Available</option>
               </select>
 
               <textarea

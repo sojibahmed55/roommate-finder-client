@@ -921,9 +921,9 @@ transition-colors duration-300"
                 <div className="relative group">
                   <button className="flex items-center gap-2 p-1 pl-1  rounded-full bg-gray-100 dark:bg-gray-800 border border-transparent hover:border-blue-500/50 transition-all">
                     <img
-                      src={user.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"}
+                      src={user?.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"}
                       className="w-8 h-8 rounded-full object-cover"
-                      alt="avatar"
+                      alt=""
                     />
                     {/* <span className="text-sm font-bold dark:text-gray-200">
                       {user.displayName?.split(" ")[0]}
@@ -1062,7 +1062,7 @@ transition-colors duration-300"
                     to="/login"
                     className="w-full"
                   >
-                    <button className="w-full py-3 btn border border-[#e3d8c2] bg-transparent text-[#dbc187]">
+                    <button className="w-full py-3 btn border border-[#e3d8c2] bg-transparent text-[#dbc187] dark:border-white/70 dark:text-white hover:bg-[#e3d8c2] hover:text-black hover:border-[#e3d8c2] transition-colors">
                       Login
                     </button>
                   </Link>
@@ -1072,7 +1072,7 @@ transition-colors duration-300"
                   <Link to="/register" className="w-full">
                     <button
                       onClick={() => setIsMenuOpen(false)}
-                      className="w-full py-3 btn  border border-[#e3d8c2] bg-[#e3d8c2] text-black"
+                      className="w-full py-3 btn  border border-[#e3d8c2] bg-[#e3d8c2] text-black dark:bg-[#e3d8c2] dark:text-white hover:bg-transparent hover:text-[#e3d8c2] hover:border-[#e3d8c2] dark:hover:bg-[#e3d8c2] dark:hover:text-black transition-colors"
                     >
                       Sign Up
                     </button>

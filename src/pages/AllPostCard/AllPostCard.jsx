@@ -2,9 +2,8 @@ import React from 'react';
 import { FaCheckCircle, FaHome, FaMapMarkerAlt, FaMoneyBillWave, FaTimesCircle } from 'react-icons/fa';
 import { Link } from 'react-router';
 
-const RoommateCard = ({ roommate }) => {
-  const {
-    _id,
+const AllPostCard = ({post}) => {
+    const {_id,
     title,
     roomType,
     rent,
@@ -13,23 +12,22 @@ const RoommateCard = ({ roommate }) => {
     lifestylePreferences,
     description,
     contactInfo,
-    availability,
-  } = roommate;
+    availability } = post;
 
-  
-  const isAvailable =
+    const isAvailable =
     typeof availability === 'boolean'
       ? availability
       : availability === 'Available';
 
-  return (
-    <div className="w-full mx-auto max-w-[570px] bg-[#fdfbf7] dark:bg-[#1a1a1a] dark:border-[#333] rounded-[28px] shadow-[0_28px_80px_rgba(143,120,72,0.25)] border border-[#e2d6bf] p-8">
+    return (
+        <div className="w-full mx-auto max-w-[570px] bg-[#fdfbf7] dark:bg-[#1a1a1a] dark:border-[#333] rounded-[28px] shadow-[0_28px_80px_rgba(143,120,72,0.25)] border border-[#e2d6bf] p-8">
 
       {/* Image */}
       <img
         className="rounded-xl h-60 w-full object-cover shadow-md"
         src={photoUrl}
-        alt={title}
+        // src={photoUrl || "https://via.placeholder.com/400"}
+        alt=""
       />
 
       {/* Title */}
@@ -75,36 +73,6 @@ const RoommateCard = ({ roommate }) => {
         to={`/roommate-details/${_id}`}
         className="relative inline-block px-6 py-3 font-semibold group mt-6"
       >
-        {/* <span
-          className="
-      absolute inset-0 w-full h-full
-      transition-all duration-200 ease-out
-      transform translate-x-1 translate-y-1
-      bg-[#8f7848]
-      group-hover:translate-x-0
-      group-hover:translate-y-0
-      rounded-md
-    "
-        ></span>
-        <span
-          className="
-      absolute inset-0 w-full h-full
-      bg-[#e3d8c2]
-      border border-[#d4c6a6]
-      rounded-md
-      group-hover:bg-[#d8c9ab]
-      transition-colors duration-200
-    "
-        ></span>
-        <span
-          className="
-      relative
-      text-[#161616] dark:text-black
-      tracking-wide
-    "
-        >
-          See More
-        </span> */}
         <span
                     className="absolute inset-0 w-full h-full
                                transition-all duration-200 ease-out
@@ -129,8 +97,16 @@ const RoommateCard = ({ roommate }) => {
                   </span>
       </Link>
     </div>
-
-  );
+    // <div>
+    //      <p>{title}</p>
+    //      <img src={photoUrl} alt="" />    
+    //      <p>{roomType}</p>    
+    //      <p>{location}</p>    
+    //      <p>{rent}</p>    
+    //      <p>{availability}</p>    
+           
+    // </div>
+    );
 };
 
-export default RoommateCard;
+export default AllPostCard;

@@ -2,10 +2,13 @@ import React, { use, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import SocialLogin from "../Shared/SocialLogin";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { signInUser } = use(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,12 +18,41 @@ const Login = () => {
     console.log(email, password);
 
     signInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-      })
-      .catch((error) => {
-        console.log(error);
+    .then((result) => {
+      console.log(result.user);
+      Swal.fire({
+        title: "Login Successful 🎉",
+        text: "Welcome back to your account!",
+        icon: "success",
+        background: "#1e293b", 
+        color: "#fff",
+        confirmButtonColor: "#caaa65",
+        confirmButtonText: "Go to Home",
+        timer: 2000,
+        showConfirmButton: false,
       });
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+
+    })
+    .catch((error) => {
+      Swal.fire({
+        title: "Login Failed!",
+        text: error.message,
+        icon: "error",
+        confirmButtonColor: "#d33",
+      });
+    });
+
+    // signInUser(email, password)
+    //   .then((result) => {
+    //     console.log(result.user);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   return (
