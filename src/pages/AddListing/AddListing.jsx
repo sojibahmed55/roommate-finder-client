@@ -21,11 +21,18 @@ const AddListing = () => {
       .then((data) => {
         console.log("data come soon", data);
         if (data.insertedId) {
-          alert("added suceess");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Roommate Post Is Created",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          form.reset();
+
+          // alert("added suceess");
         }
       });
-      
-      
   };
 
   return (
@@ -57,14 +64,18 @@ dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
             { name: "rent", placeholder: "Rent Amount", type: "number" },
             { name: "photoUrl", placeholder: "Photo URL" },
           ].map((field, i) => (
-            <input
-              key={i}
-              name={field.name}
-              type={field.type || "text"}
-              placeholder={field.placeholder}
-              required
-              className="
-                w-full px-4 py-3.5 rounded-[18px]
+            <div key={i} className="flex flex-col gap-1">
+              <label className="text-sm text-gray-500 dark:text-gray-400">
+                {field.placeholder}
+              </label>
+
+              <input
+                name={field.name}
+                type={field.type || "text"}
+                placeholder={field.placeholder}
+                required
+                className="
+        w-full px-4 py-3.5 rounded-[18px]
                 bg-white border border-[#ddd2bd]
                 focus:border-[#8f7848]
                 focus:ring-1 focus:ring-[#e9dec8]
@@ -76,85 +87,69 @@ dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
             dark:placeholder:text-gray-400
             dark:focus:border-[#d6c08a]
             dark:focus:ring-[#3a3123]
-              "
-            />
+      "
+              />
+            </div>
           ))}
 
           {/* Select */}
-          <select
-            name="roomType"
-            required
-            defaultValue=""
-            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
-          dark:text-[#ffffff]
-          dark:focus:border-[#d6c08a]
-          transition-all duration-300"
-          >
-            <option value="" disabled>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm text-gray-500 dark:text-gray-400">
               Room Type
-            </option>
+            </label>
 
-            <option value="Single">Single</option>
-            <option value="Shared">Shared</option>
-          </select>
-
-          {/* <select
-            name="roomType"
-            required
-            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+            <select
+              name="roomType"
+              required
+              defaultValue=""
+              className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
           dark:text-[#ffffff]
           dark:focus:border-[#d6c08a]
           transition-all duration-300"
-          >
-            <option disabled selected>
-              Room Type
-            </option>
-            <option>Single</option>
-            <option>Shared</option>
-          </select> */}
+            >
+              <option value="" disabled>
+                Select Room Type
+              </option>
+              <option value="Single">Single</option>
+              <option value="Shared">Shared</option>
+            </select>
+          </div>
 
-          <select
-            name="lifestylePreferences"
-            required
-            defaultValue=""
-            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
-  dark:text-[#ffffff]
-  dark:focus:border-[#d6c08a]
-  transition-all duration-300"
-          >
-            <option value="" disabled>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm text-gray-500 dark:text-gray-400">
               Lifestyle Preference
-            </option>
+            </label>
 
-            <option value="Pets">Pets</option>
-            <option value="Smoking">Smoking</option>
-            <option value="Night Owl">Night Owl</option>
-          </select>
-
-          {/* <select
-            name="lifestylePreferences"
-            required
-            className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
-          dark:text-[#ffffff]
-          dark:focus:border-[#d6c08a]
-          transition-all duration-300"
-          >
-            <option disabled selected>
-              Lifestyle Preference
-            </option>
-            <option>Pets</option>
-            <option>Smoking</option>
-            <option>Night Owl</option>
-          </select> */}
+            <select
+              name="lifestylePreferences"
+              required
+              defaultValue=""
+              className="w-full px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+    dark:text-[#ffffff]
+    dark:focus:border-[#d6c08a]
+    transition-all duration-300"
+            >
+              <option value="" disabled>
+                Select Lifestyle Preference
+              </option>
+              <option value="Pets">Pets</option>
+              <option value="Smoking">Smoking</option>
+              <option value="Night Owl">Night Owl</option>
+            </select>
+          </div>
 
           {/* Textarea */}
-          <textarea
-            name="description"
-            rows="3"
-            placeholder="Description"
-            required
-            className="
-              md:col-span-2 px-4 py-3.5 rounded-[18px]
+          <div className="flex flex-col gap-1 md:col-span-2">
+            <label className="text-sm text-gray-500 dark:text-gray-400">
+              Description
+            </label>
+
+            <textarea
+              name="description"
+              rows="3"
+              placeholder="Description"
+              required
+              className="px-4 py-3.5 rounded-[18px]
               bg-white border border-[#ddd2bd]
               focus:border-[#8f7848]
               focus:ring-1 focus:ring-[#e9dec8]
@@ -164,66 +159,77 @@ dark:shadow-[0_40px_100px_rgba(0,0,0,0.75)] dark:border-[#2f291f]
           dark:text-[#ffffff]
           dark:placeholder:text-gray-400
           dark:focus:border-[#d6c08a]
-          dark:focus:ring-[#3a3123]     "
-          />
+          dark:focus:ring-[#3a3123]"
+            />
+          </div>
 
-          <input
-            name="contactInfo"
-            placeholder="Contact Info"
-            required
-            className="md:col-span-2 px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+          {/* Contact Info */}
+          <div className="flex flex-col gap-1 md:col-span-2">
+            <label className="text-sm text-gray-500 dark:text-gray-400">
+              Contact Info
+            </label>
+
+            <input
+              name="contactInfo"
+              placeholder="Contact Info"
+              required
+              className="px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
           dark:text-[#e6dcc6]
           dark:placeholder:text-gray-400
           dark:focus:border-[#d6c08a]
           transition-all duration-300"
-          />
+            />
+          </div>
 
-          <select
-            name="availability"
-            required
-            defaultValue=""
-            className="md:col-span-2 px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
-          dark:text-[#ffffff]
-          dark:focus:border-[#d6c08a]
-          transition-all duration-300"
-          >
-            <option value="" disabled>
+          {/* Availability */}
+          <div className="flex flex-col gap-1 md:col-span-2">
+            <label className="text-sm text-gray-500 dark:text-gray-400">
               Availability
-            </option>
+            </label>
 
-            <option value="Available">Available</option>
-            <option value="Not Available">Not Available</option>
-          </select>
-
-          {/* <select
-            name="availability"
-            required
-            className="md:col-span-2 px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
-          dark:text-[#ffffff]
-          dark:focus:border-[#d6c08a]
-          transition-all duration-300"
-          >
-            <option disabled selected>
-              Availability
-            </option>
-            <option>Available</option>
-            <option>Not Available</option>
-          </select> */}
+            <select
+              name="availability"
+              required
+              defaultValue=""
+              className="px-4 py-3.5 rounded-[18px] bg-white border border-[#ddd2bd] text-sm focus:border-[#8f7848] dark:bg-[#1c1914] dark:border-[#3a3226]
+    dark:text-[#ffffff]
+    dark:focus:border-[#d6c08a]
+    transition-all duration-300"
+            >
+              <option value="" disabled>
+                Choose Availability
+              </option>
+              <option value="Available">Available</option>
+              <option value="Not Available">Not Available</option>
+            </select>
+          </div>
 
           {/* Read only */}
-          <input
-            name="userEmail"
-            defaultValue={user?.email}
-            readOnly
-            className="px-4 py-3.5 rounded-[18px] bg-[#f1ede5] text-gray-600 text-sm dark:bg-[#15120e] dark:text-[#ffffff]"
-          />
+          <div className="flex flex-col gap-1">
+            <label className="text-sm text-gray-500 dark:text-gray-400">
+              User Name
+            </label>
 
-          <input
-            name="userName"
-            defaultValue={user?.displayName}
-            readOnly
-            className="px-4 py-3.5 rounded-[18px] bg-[#f1ede5] text-gray-600 text-sm dark:bg-[#15120e] dark:text-[#ffffff]"
-          />
+            <input
+              name="userName"
+              defaultValue={user?.displayName}
+              readOnly
+              className="px-4 py-3.5 rounded-[18px] bg-[#f1ede5] text-gray-600 text-sm dark:bg-[#15120e] dark:text-[#ffffff]"
+            />
+          </div>
+          
+          <div className="flex flex-col gap-1">
+            <label className="text-sm text-gray-500 dark:text-gray-400">
+              Email
+            </label>
+
+            <input
+              name="userEmail"
+              defaultValue={user?.email}
+              readOnly
+              className="px-4 py-3.5 rounded-[18px] bg-[#f1ede5] text-gray-600 text-sm dark:bg-[#15120e] dark:text-[#ffffff]"
+            />
+          </div>
 
           {/* Button */}
           <div className="md:col-span-2 pt-4">
