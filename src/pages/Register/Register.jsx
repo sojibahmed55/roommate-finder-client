@@ -1,29 +1,64 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import SocialLogin from "../Shared/SocialLogin";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from || '/';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
+
     const name = form.name.value;
     const email = form.email.value;
     const photoUrl = form.photoUrl.value;
     const password = form.password.value;
 
+
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$/;
+
+    if (!passwordRegex.test(password)) {
+      Swal.fire({
+        icon: "error",
+        title: "Invalid Password",
+        text: "Password must contain at least 6 characters including uppercase, lowercase and special character.",
+      });
+      return;
+    }
+
     try {
       const result = await createUser(email, password, name, photoUrl);
+
       console.log("Registered User:", result.user);
-      toast.success("Account created successfully!");
-      form.reset();
+
+      Swal.fire({
+        icon: "success",
+        title: "Account Created!",
+        text: "Your account has been created successfully.",
+        timer: 2000,
+        showConfirmButton: false,
+      }).then(() => {
+        form.reset();
+        // navigate("/");
+        navigate(from, { replace: true });
+      });
     } catch (error) {
       console.error(error);
-      toast.error(error.message);
+
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: error.message.replace("Firebase: Error ", ""),
+      });
     }
   };
 
@@ -34,17 +69,14 @@ const Register = () => {
           w-full max-w-md
           bg-white dark:bg-slate-900 
           rounded-2xl
-          
           shadow-[0_20px_50px_rgba(0,0,0,0.08)]
           px-8 py-9
         "
       >
-        {/* Title */}
         <h2 className="text-2xl font-semibold text-center text-[#1b1b1b] dark:text-white mb-6 transition-colors duration-300">
           Create your account
         </h2>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label className="text-sm font-medium text-[#5c5130] dark:text-gray-300 transition-colors duration-300">
@@ -55,10 +87,8 @@ const Register = () => {
               name="name"
               placeholder="Enter full name"
               required
-              className="
-                                w-full px-4 py-3 border border-gray-300 rounded-md text-black bg-white dark:border-gray-600 dark:text-white dark:bg-slate-800 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-300"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md text-black bg-white dark:border-gray-600 dark:text-white dark:bg-slate-800 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-300"
             />
-            {/* w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md text-black dark:text-white bg-white dark:bg-slate-800 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-300 */}
           </div>
 
           <div>
@@ -90,15 +120,17 @@ const Register = () => {
             />
           </div>
 
-          {/* Password with Eye Toggle */}
           <div className="relative">
             <label className="text-sm font-medium text-[#5c5130] dark:text-gray-300 transition-colors duration-300">
               Password
             </label>
+
             <input
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Enter password"
+              minLength="6"
+
               required
               className="
                 w-full px-4 py-3 border border-gray-300 rounded-md text-black bg-white dark:border-gray-600 dark:text-white dark:bg-slate-800 placeholder-gray-400 dark:placeholder-gray-500 transition-colors duration-300
@@ -132,7 +164,6 @@ const Register = () => {
           </div>
         </form>
 
-        {/* OR Divider */}
         <div className="my-5 flex items-center">
           <div className="flex-grow h-px bg-gray-300 dark:bg-gray-600" />
           <span className="mx-4 text-xs font-medium text-gray-500 dark:text-gray-400">
@@ -140,17 +171,19 @@ const Register = () => {
           </span>
           <div className="flex-grow h-px  bg-gray-300 dark:bg-gray-600" />
         </div>
+
         <div className="flex justify-center">
           <SocialLogin />
         </div>
+
         <p className="mt-6 text-center text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">
           Already have an account?{" "}
-          <a
-            href="/login"
-            className="font-medium text-[#8f7848] hover:underline dark:text-[#caaa65]  transition-colors duration-300"
+          <Link
+            to="/login"
+            className="font-medium text-[#8f7848] hover:underline dark:text-[#caaa65] transition-colors duration-300"
           >
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>

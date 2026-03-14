@@ -1,5 +1,4 @@
 import { useContext } from "react";
-// import { ThemeContext } from "../contexts/ThemeContext";
 import { Sun, Moon } from "lucide-react";
 import { ThemeContext } from "../../contexts/AuthContext/ThemeContext";
 

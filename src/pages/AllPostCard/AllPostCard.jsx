@@ -97,15 +97,6 @@ const AllPostCard = ({post}) => {
                   </span>
       </Link>
     </div>
-    // <div>
-    //      <p>{title}</p>
-    //      <img src={photoUrl} alt="" />    
-    //      <p>{roomType}</p>    
-    //      <p>{location}</p>    
-    //      <p>{rent}</p>    
-    //      <p>{availability}</p>    
-           
-    // </div>
     );
 };
 

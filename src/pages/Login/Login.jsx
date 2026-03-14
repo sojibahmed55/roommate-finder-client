@@ -1,14 +1,17 @@
-import React, { use, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import SocialLogin from "../Shared/SocialLogin";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signInUser } = use(AuthContext);
+  const { signInUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const from = location.state?.from || '/';
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,41 +21,29 @@ const Login = () => {
     console.log(email, password);
 
     signInUser(email, password)
-    .then((result) => {
-      console.log(result.user);
-      Swal.fire({
-        title: "Login Successful 🎉",
-        text: "Welcome back to your account!",
-        icon: "success",
-        background: "#1e293b", 
-        color: "#fff",
-        confirmButtonColor: "#caaa65",
-        confirmButtonText: "Go to Home",
-        timer: 2000,
-        showConfirmButton: false,
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          text: "Welcome Back!",
+          timer: 2000,
+          showConfirmButton: false,
+        }).then(() => {
+          form.reset();
+          navigate(from, { replace: true });
+          // navigate("/");
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: "Login Failed!",
+          text: error.message.replace("Firebase: Error ", ""),
+          icon: "error",
+          confirmButtonColor: "#d33",
+        });
       });
-
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-
-    })
-    .catch((error) => {
-      Swal.fire({
-        title: "Login Failed!",
-        text: error.message,
-        icon: "error",
-        confirmButtonColor: "#d33",
-      });
-    });
-
-    // signInUser(email, password)
-    //   .then((result) => {
-    //     console.log(result.user);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
   return (
@@ -144,12 +135,12 @@ const Login = () => {
         {/* Footer */}
         <p className="mt-6 text-center text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors duration-300">
           Don’t have an account?{" "}
-          <a
-            href="/register"
+          <Link
+            to="/register"
             className="font-medium text-[#8f7848] hover:underline dark:text-[#caaa65]  transition-colors duration-300"
           >
             Register
-          </a>
+          </Link>
         </p>
       </div>
     </div>

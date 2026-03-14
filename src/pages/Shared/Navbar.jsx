@@ -1,24 +1,42 @@
-import React, { useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
 import { Link, NavLink } from "react-router";
-import { Menu, X, Sun, Moon, LogOut } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, signOutUser } = useContext(AuthContext);
 
-
   const handleSignOut = () => {
-    signOutUser()
-      .then(() => {
-        console.log("sign out user");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to logout from your account?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#8f7848",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Logout",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signOutUser()
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Logged Out!",
+              text: "You have been successfully logged out.",
+              timer: 2000,
+              showConfirmButton: false,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
   };
-  
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -29,7 +47,6 @@ const Navbar = () => {
 
   return (
     <>
-      
       <header
         className="sticky top-0 z-50 
 bg-white dark:bg-slate-950
@@ -97,14 +114,16 @@ transition-colors duration-300"
           <div className="flex items-center gap-2 md:gap-4">
             {/* Theme Toggle */}
             <ThemeToggle></ThemeToggle>
-            
+
             {/* Auth/Profile */}
             <div className="hidden md:block">
               {user ? (
                 <div className="relative group">
                   <button className="flex items-center gap-2 p-1 pl-1  rounded-full bg-gray-100 dark:bg-gray-800 border border-transparent hover:border-blue-500/50 transition-all">
                     <img
-                      src={user?.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"}
+                      src={
+                        user?.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"
+                      }
                       className="w-8 h-8 rounded-full object-cover"
                       alt=""
                     />
@@ -120,7 +139,7 @@ transition-colors duration-300"
                         {user.email}
                       </p>
                     </div>
-                    
+
                     <button
                       onClick={handleSignOut}
                       className="w-full flex items-center cursor-pointer gap-3 px-4 py-3 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors"
@@ -131,7 +150,6 @@ transition-colors duration-300"
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-        
                   <Link
                     to="/login"
                     className="btn border border-[#e3d8c2] bg-transparent text-[#dbc187] dark:border-white/70 dark:text-white hover:bg-[#e3d8c2] hover:text-black hover:border-[#e3d8c2] transition-colors"
@@ -139,7 +157,6 @@ transition-colors duration-300"
                     Login
                   </Link>
                   <Link to="/register">
-                    
                     <button className="btn  border border-[#e3d8c2] bg-[#e3d8c2] text-black dark:bg-[#e3d8c2] dark:text-white hover:bg-transparent hover:text-[#e3d8c2] hover:border-[#e3d8c2] dark:hover:bg-[#e3d8c2] dark:hover:text-black transition-colors">
                       Sign Up
                     </button>
@@ -208,10 +225,19 @@ transition-colors duration-300"
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 px-2">
                     <img
-                      src={user.photoURL}
+                      src={
+                        user?.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"
+                      }
+                      alt="user profile"
                       className="w-10 h-10 rounded-full border-2 border-blue-500 p-0.5"
-                      alt="user"
                     />
+                    {/* <img
+                      src={
+                        user?.photoURL || "https://i.ibb.co/4Zg2z2M/user.png"
+                      }
+                      className="w-10 h-10 rounded-full border-2 border-blue-500 p-0.5"
+                    /> */}
+
                     <div>
                       <p className="font-bold dark:text-white text-sm">
                         {user.displayName}
@@ -222,7 +248,11 @@ transition-colors duration-300"
                     </div>
                   </div>
                   <button
-                    onClick={handleSignOut}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      handleSignOut();
+                    }}
+                    // onClick={handleSignOut}
                     className="w-full py-3.5 bg-red-50 dark:bg-red-500/10 text-red-500 rounded-2xl font-bold text-sm active:scale-95 transition-all"
                   >
                     Log Out
@@ -230,7 +260,6 @@ transition-colors duration-300"
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-3">
-                  
                   <Link
                     onClick={() => setIsMenuOpen(false)}
                     to="/login"

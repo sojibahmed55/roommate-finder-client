@@ -8,10 +8,8 @@ import RoommateDetails from '../Components/RoommateDetails/RoommateDetails';
 import BrowseListing from '../Components/BrowseListing/BrowseListing';
 import Login from '../pages/Login/Login';
 import MyListing from '../Components/MyListing/MyListing';
-import RoommateUpdate from '../Components/RoommateUpdate/RoommateUpdate';
-import Details from '../Components/Details/Details';
 import RequireAuth from '../contexts/RequireAuth/RequireAuth';
-import Spinner from '../Components/Spinner/Spinner';
+
 
 
 const router = createBrowserRouter([
@@ -33,7 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/add-listing',
-                Component: AddListing,
+                element: <RequireAuth><AddListing></AddListing></RequireAuth>,
             },
             {
                 path: '/my-listing',
@@ -43,12 +41,11 @@ const router = createBrowserRouter([
             {
                 path: '/roommate-details/:id',
                 loader: ({params}) => fetch(`http://localhost:5000/roommate/${params.id}`),
-                element: <RoommateDetails></RoommateDetails>
+                element: <RequireAuth><RoommateDetails></RoommateDetails></RequireAuth>,
                 
             },
             {
                 path: '/browse-listing',
-                // loader: () => fetch("http://localhost:5000/roommate"),
                 element: <BrowseListing></BrowseListing>
             }
         ]

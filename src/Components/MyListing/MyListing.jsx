@@ -76,7 +76,17 @@ const MyListing = () => {
                 : item,
             ),
           );
-          Swal.fire("Updated!", "Listing updated successfully", "success");
+          // Swal.fire("Updated!", "Listing updated successfully", "success");
+          Swal.fire({
+            title: "Updated!",
+            text: "Listing updated successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#8f7848",
+            // background: "#1e293b",
+            // color: "#1e293b",
+          });
+
           setSelectedItem(null);
         }
       });
@@ -469,7 +479,7 @@ const MyListing = () => {
               </div>
               <div className="flex flex-col gap-1">
                 <label className="text-sm text-gray-500 dark:text-gray-400">
-                 User Email
+                  User Email
                 </label>
                 <input
                   name="userEmail"

@@ -1,41 +1,38 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../AuthContext/AuthContext';
-import { useNavigate } from 'react-router';
-import Swal from 'sweetalert2';
+import React, { useContext, useEffect } from "react";
+import { AuthContext } from "../AuthContext/AuthContext";
+import { useNavigate, useLocation } from "react-router";
+import Swal from "sweetalert2";
 
-const RequireAuth = ({children}) => {
-    const { user, loading } = useContext(AuthContext);
+const RequireAuth = ({ children }) => {
+  const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [go, setGo] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (!user && !loading) {
       Swal.fire({
-        title: "Login For See",
-        text: "Redirecting to login page...",
+        title: "Login Required",
+        text: "Please login to access this page.",
         icon: "info",
         showConfirmButton: false,
-        timer: 1000,
+        timer: 1200,
         timerProgressBar: true,
-        allowOutsideClick: false,
-        background: "#fefefe",
-        color: "#333",
-        customClass: {
-          popup: "rounded-xl shadow-md p-5",
-          title: "text-lg font-semibold",
-        },
       }).then(() => {
-        setGo(true);
+        navigate("/login", { state: { from: location.pathname } });
       });
     }
-  }, [user, loading]);
+  }, [user, loading, navigate, location.pathname]);
 
-  if (go && !user) {
-    return navigate("/login");
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
   }
 
   if (!user) {
-    return <div className="min-h-screen bg-gray-950/30"></div>;
+    return null;
   }
 
   return children;
