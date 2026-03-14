@@ -16,7 +16,7 @@ const MyListing = () => {
     if (user?.email) {
       setDataLoading(true);
 
-      fetch(`http://localhost:5000/roommate-by-email?email=${user.email}`)
+      fetch(`https://roommate-finder-server-gilt.vercel.app/roommate-by-email?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setListings(data);
@@ -41,7 +41,7 @@ const MyListing = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/roommate/${id}`, {
+        fetch(`https://roommate-finder-server-gilt.vercel.app/roommate/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -61,7 +61,7 @@ const MyListing = () => {
     const form = e.target;
     const updatedRoommate = Object.fromEntries(new FormData(form).entries());
 
-    fetch(`http://localhost:5000/roommate/${selectedItem._id}`, {
+    fetch(`https://roommate-finder-server-gilt.vercel.app/roommate/${selectedItem._id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updatedRoommate),

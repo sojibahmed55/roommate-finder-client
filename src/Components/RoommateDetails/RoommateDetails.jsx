@@ -24,7 +24,7 @@ const RoommateDetails = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/roommate/${id}`)
+    fetch(`https://roommate-finder-server-gilt.vercel.app/roommate/${id}`)
       .then(res => res.json())
       .then(data => {
         setRoommate(data);
@@ -54,7 +54,7 @@ const RoommateDetails = () => {
       return Swal.fire("Oops!", "You can't like your own post", "error");
     }
 
-    fetch(`http://localhost:5000/roommate/like/${roommate._id}`, {
+    fetch(`https://roommate-finder-server-gilt.vercel.app/roommate/like/${roommate._id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userEmail: user.email }),

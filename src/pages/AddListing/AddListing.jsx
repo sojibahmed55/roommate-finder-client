@@ -12,7 +12,7 @@ const AddListing = () => {
     const data = Object.fromEntries(formData.entries());
     console.log(data);
 
-    fetch("http://localhost:5000/roommate", {
+    fetch("https://roommate-finder-server-gilt.vercel.app/roommate", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),

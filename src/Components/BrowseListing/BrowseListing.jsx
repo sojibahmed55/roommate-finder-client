@@ -8,7 +8,7 @@ const BrowseListing = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/roommate")
+      .get("https://roommate-finder-server-gilt.vercel.app/roommate")
       .then((res) => {
         setAllPost(res.data);
       })

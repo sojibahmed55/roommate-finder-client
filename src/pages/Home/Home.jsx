@@ -13,7 +13,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/featured-roommates")
+    fetch("https://roommate-finder-server-gilt.vercel.app/featured-roommates")
       .then(res => res.json())
       .then(data => {
         setRoommates(data);

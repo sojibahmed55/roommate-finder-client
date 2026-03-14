@@ -40,7 +40,7 @@ const router = createBrowserRouter([
             
             {
                 path: '/roommate-details/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/roommate/${params.id}`),
+                loader: ({params}) => fetch(`https://roommate-finder-server-gilt.vercel.app/roommate/${params.id}`),
                 element: <RequireAuth><RoommateDetails></RoommateDetails></RequireAuth>,
                 
             },
